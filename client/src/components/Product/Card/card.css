@@ -1,0 +1,23 @@
+.bi-pencil,
+.bi-trash3 {
+    font-size: 1.2rem;
+    padding: 0.2rem;
+}
+
+
+/* styles.css */
+.custom-border {
+    background-color: var(--bs-secondary-bg);
+}
+
+.custom-button:hover {
+    background-color: var(--bs-info);
+    border-radius: 30%;
+    padding: 0.2rem;
+}
+
+.custom-button-error:hover {
+    background-color: var(--bs-danger);
+    border-radius: 30%;
+    padding: 0.7rem !important;
+}

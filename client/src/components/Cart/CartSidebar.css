@@ -1,0 +1,43 @@
+/* CartSidebar.css */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 50%;
+    max-width: 400px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    z-index: 1050;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+/* .cart-sidebar-header {
+    display: flex;
+    align-items: start;
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+} */
+
+.cart-sidebar-body {
+    padding: 1rem;
+}
+
+.cart-product {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
