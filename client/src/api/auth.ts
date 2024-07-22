@@ -14,7 +14,15 @@ export const loginUser = async (email: string, password: string) => {
     }
 
     const data = await response.json();
-    return data;
+        
+     // Extraer el token del header
+     const token = response.headers.get('auth-token');
+     if (token) {
+      // Aquí puedes guardar el token en localStorage, sessionStorage o en el estado global de tu aplicación
+      localStorage.setItem('token',token);
+    }
+    return { ...data, token }; // Incluye el token en la respuesta para su uso inmediato si es necesario
+
   } catch (error) {
     if (error instanceof Error) {
       throw new Error("Error logging in: " + error.message);

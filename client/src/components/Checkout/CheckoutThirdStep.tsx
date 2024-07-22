@@ -16,16 +16,16 @@ const CheckoutThirdStep: React.FC<CheckoutThirdStepProps> = ({
       {/* Formulario de contacto */}
       <InputField
         type="text"
-        name="email"
-        id="email"
+        name="nombre"
+        id="nombre"
         placeholder="Nombre"
         value={null}
         onChange={null}
       ></InputField>
       <InputField
         type="text"
-        name="cp"
-        id="cp"
+        name="apellido"
+        id="apellido"
         placeholder="Apellido"
         value={null}
         onChange={null}

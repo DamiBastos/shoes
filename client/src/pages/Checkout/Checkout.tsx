@@ -8,7 +8,6 @@ const Checkout: React.FC = () => {
       <h1>Checkout Page</h1>
       <div className="d-flex justify-content-between">
         <CheckoutForm></CheckoutForm>
-
         <CheckoutCart></CheckoutCart>
       </div>
     </div>

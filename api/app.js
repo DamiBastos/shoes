@@ -4,11 +4,13 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors"); // Importa el módulo cors
+var verifyToken = require("./middlewares/verifyToken.js")
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var shoesRouter = require("./routes/shoes");
 var cartsRouter = require("./routes/carts");
+// const { verify } = require("crypto");
 
 var app = express();
 
@@ -17,6 +19,8 @@ app.use(
     origin: "http://localhost:5173", // Origen permitido (puedes usar "*", pero es menos seguro)
     methods: ["GET", "POST", "PUT", "DELETE"], // Métodos HTTP permitidos
     allowedHeaders: ["Content-Type", "Authorization"], // Cabeceras permitidas
+    exposedHeaders: ['auth-token']
+
   })
 );
 
@@ -30,7 +34,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/",
+  //verifyToken,
+  indexRouter);
 app.use("/users", usersRouter);
 app.use("/shoes", shoesRouter);
 app.use("/carts", cartsRouter);

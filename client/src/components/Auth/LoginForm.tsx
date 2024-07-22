@@ -31,7 +31,7 @@ const LoginForm: React.FC = () => {
       console.log("Login successful", data);
 
       // Guardar el usuario (o token) en el almacenamiento local o en el estado de la aplicación
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("user", JSON.stringify(data.data));
 
       // Reset error
       setError(null);

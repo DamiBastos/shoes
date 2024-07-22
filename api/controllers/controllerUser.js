@@ -1,6 +1,10 @@
 const db = require("../models/index");
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
+const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
+var  generateToken  = require("../middlewares/generateToken")
+
 
 const controllerUser = {
   list: async (req, res) => {
@@ -12,20 +16,32 @@ const controllerUser = {
     try {
       const { password, email } = req.body;
       const user = await db.User.findOne({
-        where: { email, password },
+        where: { email },
         include: [
           {
             model: db.Cart,
-            as: "cart", // Especifica el alias que has definido en el modelo User
+            as: "cart",
           },
         ],
       });
-
-      if (user) {
-        return res.status(200).json({ user });
-      } else {
+      if (!user) {
         return res.status(404).send("Usuario no encontrado");
       }
+      const validPassword = await bcrypt.compare(password, user.password);
+      if (!validPassword) {
+        return res.status(400).send("Contraseña incorrecta");
+      }
+      const token = generateToken(user);
+
+      // Envía la respuesta con el token y el usuario
+      return res.header('auth-token', token).json({
+        error: null,
+        data: { 
+          user
+         },
+        
+      });
+
     } catch (error) {
       console.log(error);
       return res.status(500).send("Error interno del servidor");
@@ -34,7 +50,10 @@ const controllerUser = {
   register: async (req, res) => {
     const transaction = await db.sequelize.transaction();
     try {
-      const { name, phone, password, email, rol, isAdmin } = req.body;
+      const { name, phone, email, rol, isAdmin } = req.body;
+
+      const salt = await bcrypt.genSalt(10);
+      const password = await bcrypt.hash(req.body.password, salt);
 
       // Crear el usuario dentro de una transacción
       const user = await db.User.create(
