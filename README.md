@@ -98,32 +98,3 @@ Ejecuta las migraciones para crear las tablas necesarias en la base de datos.
 
 ### `npx sequelize db:seed:all`
 Ejecuta los seeders para insertar datos de prueba en la base de datos.
-
-## Estructura del Proyecto
-
-```plaintext
-market-shoes/
-├── backend/
-│   ├── config/
-│   ├── controllers/
-│   ├── migrations/
-│   ├── models/
-│   ├── routes/
-│   ├── seeders/
-│   ├── middlewares/
-│   ├── .env
-│   ├── app.js
-│   └── server.js
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── App.css
-│   │   ├── App.js
-│   │   ├── index.css
-│   │   └── index.js
-│   ├── .env
-│   └── package.json
-└── README.md
