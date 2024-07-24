@@ -1,62 +1,127 @@
 import React, { useState, useEffect } from "react";
-import Card from "../Card/Card";
+// import Card from "../Card/Card";
 import { Product } from "../../../types";
 import EditProductModal from "../ProductForms/EditProductModal";
-import { listShoes } from "../../../api/shoes";
+import { listShoes, productDelete } from "../../../api/shoes";
 
-const CardList: React.FC = () => {
-  const [products, setProducts] = useState<Product[] | null>(null);
+const ProductList: React.FC = () => {
+  const [shoes, setShoes] = useState<Product[] | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const shoesData = await listShoes();
-      setProducts(shoesData);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const shoesData = await listShoes();
+      
+  //     setShoes(shoesData);
+  //   };
+  //   fetchData();
+    
+  // }, []);
 
-    fetchData();
+  const fetchShoes = async () => {
+    const shopsData = await listShoes();
+    setShoes(shopsData);
+  };
+
+  useEffect(() => {
+    fetchShoes();
   }, []);
+
 
   const handleEdit = (product: Product) => {
     setSelectedProduct(product);
     setShowModal(true);
   };
 
+  const handleDelete = (id: string) => {
+    productDelete(id)
+    fetchShoes();
+  };
+
   const handleClose = () => {
     setShowModal(false);
     setSelectedProduct(null);
+    fetchShoes();
   };
 
-  if (!products) {
-    console.log("Products sin productos: ", products);
-    return <h1>Cargando...</h1>;
-  }
-
   return (
-    <section className="d-flex flex-wrap align-items-center justify-content-center">
-      {products.map((product) => (
-        <ul key={product.id}>
-          <Card
-            id={product.id}
-            nombre={product.model}
-            imagen={product.image}
-            precio={product.price}
-            descuento={product.discount}
-            cuotas={product.stock}
-            openModal={() => handleEdit(product)} // Definir la función openModal aquí
-          />
-        </ul>
-      ))}
-      {selectedProduct && (
+    <>
+    <div>
+        Historial de ventas
+        <div className="cart-sidebar-body d-flex flex-column justify-content-between border h-75">
+    {shoes && shoes.length > 0 ? (
+      <table className="">
+        <thead>
+          <tr>
+            <th className="p-1">MODELO</th>
+            <th className="p-1">MARCA</th>
+            <th className="p-1">COLOR</th>
+        <th className="p-1">GENERO</th>
+        <th className="p-1">DESCRIPCION</th>
+        <th className="p-1">TALLE</th>
+        <th className="p-1">STOCK</th>
+        <th className="p-1">IMAGEN</th>
+        <th className="p-1">PROVEEDOR</th>
+        <th className="p-1">DESCUENTO</th>
+        <th className="p-1">PRECIO</th>
+        <th className="p-1">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+        {shoes?.map((shoe:any, index: number) => (
+            <tr key={index}>
+                <td className="p-1">{shoe.model}</td>
+            <td className="p-1">{shoe.brand}</td>
+            <td className="p-1">{shoe.color}</td>
+        <td className="p-1">{shoe.genre}</td>
+        <td className="p-1">{shoe.description}</td>
+        <td className="p-1">{shoe.size}</td>
+        <td className="p-1">{shoe.stock}</td>
+        <td className="p-1">        <img src={`/products/${shoe.image}`} alt={shoe.model} width={"100px"} />
+        </td>
+        <td className="p-1">{shoe.provider}</td>
+        <td className="p-1">{shoe.discount}</td>
+        <td className="p-1">{shoe.price}</td>
+        <td className="p-1"><div className=" d-flex align-items-center justify-content-center gap-1 p-1 ">
+          <div className="custom-button">
+            <button
+              className="custom-button border p-1"
+              onClick={() => handleEdit(shoe)} 
+
+            >
+              {" "}
+              <i className="bi bi-pencil"></i>
+            </button>
+          </div>
+          <div>
+            <button 
+            className="custom-button-error border p-1"
+            onClick={() => handleDelete(shoe.id)} 
+>
+              <i className="bi bi-trash3"></i>
+            </button>
+          </div>
+        </div></td>
+            </tr>
+        ))
+         }</tbody>          
+         </table>
+
+        ) : (
+            <span>No hay productos</span>
+        )}
+</div>
+    </div>
+    {selectedProduct && (
         <EditProductModal
           show={showModal}
           handleClose={handleClose}
           product={selectedProduct}
         />
       )}
-    </section>
+    </>
   );
 };
 
-export default CardList;
+export default ProductList;

@@ -11,6 +11,15 @@ li {
     font-size: 3rem;
 }
 
+.usuario-card {
+    margin: 0.2rem;
+    padding: 0rem 0.5rem;
+    border-radius: 10px;
+    font-family: "Bebas Neue";
+    font-size: 1.6rem;
+    text-align: center;
+}
+
 .bi-cart3,
 .bi-search {
     font-size: 1.7em;

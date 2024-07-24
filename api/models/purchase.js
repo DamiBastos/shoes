@@ -7,13 +7,13 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-      Purchase.belongsTo(models.User, {
-        foreignKey: "user_id",
-        as: "user",
-      });
-    }
+    // static associate(models) {
+    //   // define association here
+    //   Purchase.belongsTo(models.User, {
+    //     foreignKey: "user_id",
+    //     as: "user",
+    //   });
+    // }
   }
   Purchase.init(
     {
@@ -95,6 +95,13 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Purchase",
     }
   );
+
+  Purchase.associate = function (models) {
+       Purchase.belongsTo(models.User, {
+        foreignKey: "user_id",
+        as: "user",
+      });
+  };
 
   return Purchase;
 };

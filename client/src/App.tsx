@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register";
 import ProductDetail from "./pages/Products/ProductDetail";
 import Dashboard from "./pages/Admin/Dashboard";
 import Checkout from "./pages/Checkout/Checkout";
+import MyShops from "./pages/MyShop/MyShops";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/shops" element={<MyShops />} />
       <Route path="/product/:id" element={<ProductDetail />} />
       <Route path="/payment" element={<Checkout />} />
       <Route path="/admin/dashboard" element={<Dashboard />} />

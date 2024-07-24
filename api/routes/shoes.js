@@ -6,7 +6,7 @@ const controllerShoe = require("../controllers/controllerShoe");
 router.get("/", controllerShoe.list);
 router.get("/:id", controllerShoe.findByPk);
 router.post("/create", controllerShoe.create);
-router.post("/update/:id", controllerShoe.edit);
+router.put("/update/:id", controllerShoe.edit);
 router.delete("/delete/:id", controllerShoe.delete);
 
 module.exports = router;

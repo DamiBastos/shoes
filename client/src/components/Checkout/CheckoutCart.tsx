@@ -4,15 +4,13 @@ import { useUser } from "../UserContext";
 const CheckoutCart: React.FC = () => {
   const { cart } = useUser();
 
-  console.log("carrito checkout", cart);
-
   return (
     <div className="w-25 border">
       {" "}
       Checkout Cart
       <div>
         <ul className="list-group">
-          {cart?.items.map((product, index) => (
+          {cart?.items.map((product: any, index: number) => (
             <li
               key={index}
               className="list-group-item d-flex justify-content-between align-items-center"
@@ -32,13 +30,13 @@ const CheckoutCart: React.FC = () => {
         </ul>
         <div>
           <div className="d-flex justify-content-between align-items-center">
-            <p>Subtotal</p> <p>{cart.subtotal}</p>
+            <p>Subtotal</p> <p>{cart ? cart.subtotal : 0}</p>
           </div>
           <div className="d-flex justify-content-between align-items-center">
             <p>Envío</p> <p>Total envío</p>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            <p>Total</p> <p>{cart.total}</p>
+            <p>Total</p> <p>{cart ? cart.total : 0}</p>
           </div>
         </div>
       </div>

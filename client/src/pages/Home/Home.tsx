@@ -1,5 +1,5 @@
 import React from "react";
-import CardList from "../../components/Product/ProductList/ProductList";
+import CardList from "../../components/Product/ProductList/CardList";
 
 const Home: React.FC = () => {
   return (

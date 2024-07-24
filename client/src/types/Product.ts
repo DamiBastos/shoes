@@ -10,6 +10,7 @@ export interface Product {
   image: string;
   price: number;
   discount: number;
+  provider: string;
   createdAt: string;
   updatedAt: string;
 }

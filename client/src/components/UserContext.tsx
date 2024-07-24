@@ -17,6 +17,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [cart, setCart] = useState(null);
+  const [shopList, setShopList] = useState(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -39,8 +40,22 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   };
 
+  const fetchShopList = async () => {
+    if (user) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/users/shops/${user.id}`
+        );
+        setShopList(response.data);
+      } catch (error) {
+        console.error("Error fetching cart:", error);
+      }
+    }
+  };
+
+
   return (
-    <UserContext.Provider value={{ user, cart, fetchCart }}>
+    <UserContext.Provider value={{ user, cart,shopList, fetchCart, fetchShopList }}>
       {children}
     </UserContext.Provider>
   );

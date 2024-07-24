@@ -12,6 +12,8 @@ export interface User {
 export interface UserContextType {
   user: User | null;
   cart: any;
+  shopList: any;
   fetchCart: () => void;
+  fetchShopList: () => void;
 }
 

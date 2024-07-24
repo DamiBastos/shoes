@@ -26,7 +26,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/shoes/product/${product.id}`,
+        `http://localhost:3000/shoes/update/${product.id}`,
         {
           method: "PUT",
           headers: {
@@ -124,6 +124,14 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
         name="discount"
         id="discount"
         value={product.discount}
+        onChange={handleChange}
+      />
+      <InputField
+        label="Provider"
+        type="text"
+        name="provider"
+        id="provider"
+        value={product.provider}
         onChange={handleChange}
       />
       <button type="submit">Save</button>

@@ -12,7 +12,6 @@ const Header: React.FC = () => {
     if (user && !user.isAdmin) {
       fetchCart();
     }
-    console.log("carrito header: ", cart);
   }, [user]);
 
   const handleLogout = () => {
@@ -27,7 +26,7 @@ const Header: React.FC = () => {
   return (
     <header className="">
       <article className="px-5 d-flex justify-content-between shadow-sm bg-body-tertiary rounded align-items-center">
-        <section className="d-flex gap-1">
+        <section className="d-flex gap-2">
           <a href="tel:1150042472" className="text-black">
             1150042472
           </a>
@@ -40,12 +39,15 @@ const Header: React.FC = () => {
             <a href="/admin/dashboard">Administrar</a>
           ) : null}
           {user ? (
-            <>
-              <span>{user.email}</span>
+            <div className="d-flex align-items-center justify-content">
+              <div className="d-flex align-items-center">
+                {!user.isAdmin ? <a href="/shops">Mis compras</a> : null}
+              </div>
+              <div className="usuario-card">{user.name}</div>
               <button onClick={handleLogout} className="btn btn-link">
                 <i className="bi bi-box-arrow-left text-black"></i>
               </button>
-            </>
+            </div>
           ) : (
             <>
               <a href="/register">Crear cuenta</a>

@@ -36,6 +36,7 @@ const controllerShoe = {
       image,
       price,
       discount,
+      provider
     } = req.body;
     const newShoe = await db.Shoe.create({
       model,
@@ -48,6 +49,7 @@ const controllerShoe = {
       image,
       price,
       discount,
+      provider
     });
     newShoe.save();
     return res.status(200).json({ newShoe });
@@ -64,6 +66,7 @@ const controllerShoe = {
       image,
       price,
       discount,
+      provider
     } = req.body;
     const { id } = req.params;
     const updateShoe = await db.Shoe.update(
@@ -78,6 +81,7 @@ const controllerShoe = {
         image,
         price,
         discount,
+        provider
       },
       { where: { id } }
     );
