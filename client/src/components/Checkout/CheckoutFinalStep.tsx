@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 
+import ErrorMessage from "../ErrorMessage";
+
+
+
+
 interface CheckoutFinalStepProps {
   prevStep: () => void;
   nextStep: () => void;
@@ -12,11 +17,17 @@ const CheckoutFinalStep: React.FC<CheckoutFinalStepProps> = ({
   updateFormData,
 }) => {
   const [type_payment, setType_payment] = useState<string>("");
+  const [errors, setErrors] = useState<string | null>(null);
 
   const handleNextStep = () => {
     // Actualizar los datos en formData
     updateFormData({ type_payment });
     // Ir al siguiente paso
+    
+ if (!type_payment) {
+  setErrors("Por favor, complete todos los campos obligatorios.");
+  return;
+}
     nextStep();
   };
 
@@ -84,6 +95,8 @@ const CheckoutFinalStep: React.FC<CheckoutFinalStepProps> = ({
           <p>DIRECCIÓN LOCAL</p>
         </div>
       </div>
+      <ErrorMessage message={errors} />
+
 
       <div className="d-flex justify-content-start align-items-center"></div>
       <button onClick={prevStep}>Anterior</button>

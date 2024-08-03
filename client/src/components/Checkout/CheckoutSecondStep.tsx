@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import ErrorMessage from "../ErrorMessage";
+
 
 interface CheckoutSecondStepProps {
   prevStep: () => void;
@@ -13,10 +15,17 @@ const CheckoutSecondStep: React.FC<CheckoutSecondStepProps> = ({
 }) => {
   const [typeShip, setTypeShip] = useState<string>("");
   const [shippingOption, setShippingOption] = useState<string>("");
+  const [errors, setErrors] = useState<string | null>(null);
+
 
   const handleNextStep = () => {
+   
     // Actualizar los datos en formData
     updateFormData({ typeShip, shippingOption });
+    if (!typeShip) {
+      setErrors("Por favor, complete todos los campos obligatorios.");
+      return;
+    }
     // Ir al siguiente paso
     nextStep();
   };
@@ -141,6 +150,7 @@ const CheckoutSecondStep: React.FC<CheckoutSecondStepProps> = ({
           <p>DIRECCIÓN LOCAL</p>
         </div>
       </div>
+      <ErrorMessage message={errors} />
 
       <div className="d-flex justify-content-start align-items-center"></div>
       <button onClick={prevStep}>Anterior</button>

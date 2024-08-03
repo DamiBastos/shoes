@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../InputField";
+import ErrorMessage from "../ErrorMessage";
+
 
 interface CheckoutFirstStepProps {
   nextStep: () => void;
@@ -10,10 +12,19 @@ const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep, updateF
 
   const [email, setEmail] = useState("");
   const [postal_code, setPostal_code] = useState("");
+  const [errors, setErrors] = useState<string | null>(null);
+
 
   const handleNextStep = () => {
     // Actualizar los datos en formData
     updateFormData({ email, postal_code });
+
+     // Validar campos vacíos
+     if (!email || !postal_code) {
+      setErrors("Por favor, complete todos los campos obligatorios.");
+      return;
+    }
+
     // Ir al siguiente paso
     nextStep();
   };
@@ -22,6 +33,7 @@ const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep, updateF
     <div className="">
       <h6>Información de Contacto</h6>
       {/* Formulario de contacto */}
+
       <InputField
         label="DATOS DE CONTACTO"
         type="text"
@@ -30,6 +42,7 @@ const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep, updateF
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       ></InputField>
+
       <InputField
         label="Código Postal"
         type="text"
@@ -38,6 +51,8 @@ const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep, updateF
         value={postal_code}
         onChange={(e) => setPostal_code(e.target.value)}
       ></InputField>
+            <ErrorMessage message={errors} />
+
       <button onClick={handleNextStep}>Siguiente</button>
       </div>
   );

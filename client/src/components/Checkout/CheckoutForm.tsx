@@ -10,6 +10,7 @@ import { useUser } from "../UserContext";
 import { postPurchase } from "../../api/shops";
 
 
+
 const CheckoutForm: React.FC = () => {
 
   const { cart, user } = useUser();

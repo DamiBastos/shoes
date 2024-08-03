@@ -14,7 +14,7 @@ interface RouteParams {
 const ProductDetail: React.FC = () => {
   const { id } = useParams<RouteParams>();
   const [product, setProduct] = useState<Product | null>(null);
-  // const [quantity, setQuantity] = useState(1);
+  const [clicked, setClicked] = useState(false);
 
   const { user } = useUser(); // Obtener el usuario desde el contexto
 
@@ -25,7 +25,14 @@ const ProductDetail: React.FC = () => {
     };
 
     fetchData();
-  }, [id]);
+
+    if (clicked) {
+      // Redirigir o actualizar la página después de 1 segundo
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
+    }
+  }, [id, clicked]);
 
   if (!product) {
     return <div>Cargando...</div>;
@@ -33,8 +40,12 @@ const ProductDetail: React.FC = () => {
 
   const handleAddToCart = async () => {
     try {
+      setClicked(true);
+
       const response = await addItemToCart(product.id, user); // Supongamos que estamos agregando 1 producto
       console.log("Producto agregado al carrito:", response);
+
+   
       // Puedes mostrar un mensaje al usuario de que el producto fue agregado exitosamente
     } catch (error) {
       console.error("Error al agregar el producto al carrito:", error);
@@ -74,7 +85,9 @@ const ProductDetail: React.FC = () => {
           </p>
         <p>Genero: {product.genre}</p>
         <p>Disponibles: {product.stock}</p>
-        <button className="w-100" onClick={handleAddToCart}>
+        <button className={`w-100 ${clicked ? "bg-secondary" : "bg-black"}`}
+      onClick={handleAddToCart}
+      style={{ color: "white" }}>
           Agregar al carrito
         </button>
         <p>Descripción: {product.description}</p>

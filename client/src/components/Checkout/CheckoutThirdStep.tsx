@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import InputField from "../InputField";
 
+import ErrorMessage from "../ErrorMessage";
+
+
+
+
 interface CheckoutThirdStepProps {
   prevStep: () => void;
   nextStep: () => void;
@@ -21,6 +26,7 @@ const CheckoutThirdStep: React.FC<CheckoutThirdStepProps> = ({
   const [neighborhood, setNeighborhood] = useState("");
   const [city, setCity] = useState("");
 
+  const [errors, setErrors] = useState<string | null>(null);
 
 
   const handleNextStep = () => {
@@ -35,6 +41,12 @@ const CheckoutThirdStep: React.FC<CheckoutThirdStepProps> = ({
       neighborhood,
       city 
     });
+
+    
+ if (!name || !lastname || !phone || !street || !number_street || !department || !neighborhood || !city ) {
+  setErrors("Por favor, complete todos los campos obligatorios.");
+  return;
+}
     // Ir al siguiente paso
     nextStep();
   };
@@ -108,6 +120,8 @@ const CheckoutThirdStep: React.FC<CheckoutThirdStepProps> = ({
         value={city}
         onChange={(e) => setCity(e.target.value)}
         ></InputField>
+              <ErrorMessage message={errors} />
+
       <button onClick={prevStep}>Anterior</button>
       <button onClick={handleNextStep}>Siguiente</button>
     </div>

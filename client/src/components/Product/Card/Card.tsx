@@ -91,7 +91,7 @@ const Card: React.FC<CardProps> = ({
 
                     <div className="block-image">
                             <img src={`/products/${imagen}`} alt={nombre} className="img-center"/>
-                        <span className="product-ribbon product-ribbon-right product-ribbon--style-1 bg-blue text-uppercase">New</span>
+                        
                     </div>
                     <div className="block-body text-center">
                         <h3 className="heading heading-5 strong-600 text-capitalize">
@@ -119,8 +119,8 @@ const Card: React.FC<CardProps> = ({
                                     </button>
                                 </div> */}
                                 <div className="">
-                                    <button type="button" className="btn btn-block btn-primary btn-circle btn-icon-left">
-                                        <i className="fa fa-shopping-cart"></i>Add to cart
+                                    <button type="button" className="btn btn-block btn-primary btn-circle ">
+                                    Add to cart
                                     </button>
                                 </div>
                             </div>

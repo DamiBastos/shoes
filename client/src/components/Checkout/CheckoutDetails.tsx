@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FormData } from "../../types/formData";
+import { FormData } from "../../types/FormData";
 import { useUser } from "../UserContext";
 
 interface CheckoutDetailsProps {
@@ -28,40 +28,53 @@ const CheckoutDetails: React.FC<CheckoutDetailsProps> = ({ formData, prevStep, h
   }, [cart]);
   return (
     <div className="">
-      <h6>Detalles de compra</h6>
+    <div className="border rounded">
+      <h4>DETALLES DE COMPRA</h4>
       {/* Mostrar los datos del formulario */}
-      <div>
+      <div className="">
         <h6>Información de Contacto</h6>
-        <p>Email: {formData.firstStepData.email}</p>
+        <div className="d-flex justify-content-between border align-items-center">
+        <p className="">Email: {formData.firstStepData.email}</p>
         <p>Código Postal: {formData.firstStepData.postal_code}</p>
+        </div>
       </div>
-      <div>
+      <div >
         <h6>Información de Entrega</h6>
+        <div className="d-flex justify-content-between border">
         <p>Nombre: {formData.thirdStepData.name}</p>
         <p>Apellido: {formData.thirdStepData.lastname}</p>
         <p>Teléfono: {formData.thirdStepData.phone}</p>
+        </div>
+        <div className="d-flex justify-content-between border">
+
         <p>Ciudad: {formData.thirdStepData.city}</p>
         <p>Barrio: {formData.thirdStepData.neighborhood}</p>
+        </div>
+        <div className="d-flex justify-content-between border">
+
         <p>Calle: {formData.thirdStepData.street}</p>
         <p>Número: {formData.thirdStepData.number_street}</p>
         <p>Departamento: {formData.thirdStepData.department}</p>
+        </div>
       </div>
-      <div>
+      <div className=" border">
         <h6>Método de Pago</h6>
         <p>Método: {formData.finalStepData.type_payment}</p>
         {/* <p>Número de Tarjeta: {formData.thirdStepData.cardNumber}</p> */}
       </div>
-      <div>
+      <div className=" border">
         <h6>Información de Entrega</h6>
         <p>Tipo de envío: {formData.secondStepData.type_ship}</p>
       </div>
-      <div>
-      <p>Subtotal: {subtotal}</p>
-      <p>Total: {total}</p>
+      <div className="d-flex justify-content-center border">
+      <h6 className="p-1">Subtotal: ${subtotal}</h6>
+      <h6 className="p-1">Total: ${total}</h6>
 
+      </div>
       </div>
       <button onClick={prevStep}>Volver</button>
       <button onClick={handleSubmit}>Confirmar y Enviar</button>
+    
     </div>
   );
 };

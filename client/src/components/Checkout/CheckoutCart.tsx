@@ -1,6 +1,5 @@
 import React from "react";
 import { useUser } from "../UserContext";
-import { Product } from "../../types";
 
 const CheckoutCart: React.FC = () => {
   const { cart } = useUser();

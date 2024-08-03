@@ -1,12 +1,13 @@
 import React from "react";
 import "./CartSidebar.css";
 import { CartSidebarProps } from "../../types/CartSidebarProps";
+import Products from "../../pages/Products/Products";
 
 const CartSidebar: React.FC<CartSidebarProps> = ({
   show,
   handleClose,
   products,
-  
+    
 }) => {
   return (
     <div className={`cart-sidebar ${show ? "open" : ""}`}>
@@ -50,12 +51,21 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
         ) : (
           <p>No hay productos en el carrito.</p>
         )}
-        <div className="border p-1 rounded bg-black text-light">
-          TOTAL: ${products && products.total ? products.total : "0"}
-        </div>
-        <a href="/payment" className="border p-1 rounded bg-black text-light">
+        <div className="d-flex flex-column gap-3 border rounded">
+          <div className="bg-black text-light">TOTAL: ${products && products.total ? products.total : "0"}</div>
+          <a 
+          href="/payment" 
+          className={`border p-1 rounded text-light ${products?.items.length < 1 ? 'disabled-link bg-secondary' : 'bg-dark'}`}
+          onClick={(e) => {
+            if (products.items.length < 1) {
+              e.preventDefault(); // Evita la navegación si el carrito está vacío
+            }
+          }}
+          >
           CONFIRMAR COMPRA
         </a>
+        </div>
+       
       </div>
     </div>
   );
