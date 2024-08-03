@@ -1,5 +1,7 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -7,24 +9,37 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-    }
+    // static associate(models) {
+    //   // define association here
+    // }
   }
-  User.init(
-    {
-      name: DataTypes.STRING,
-      email: DataTypes.STRING,
-      phone: DataTypes.STRING,
-      password: DataTypes.STRING,
-      isAdmin: DataTypes.BOOLEAN,
+  User.init({
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    {
-      sequelize,
-      modelName: "User",
-    }
-  );
-
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
   User.associate = function (models) {
     User.hasOne(models.Cart, {
       foreignKey: "user_id",
@@ -40,6 +55,5 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "CASCADE",
     });
   };
-
   return User;
 };

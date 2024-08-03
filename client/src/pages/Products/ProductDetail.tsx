@@ -14,6 +14,8 @@ interface RouteParams {
 const ProductDetail: React.FC = () => {
   const { id } = useParams<RouteParams>();
   const [product, setProduct] = useState<Product | null>(null);
+  // const [quantity, setQuantity] = useState(1);
+
   const { user } = useUser(); // Obtener el usuario desde el contexto
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const ProductDetail: React.FC = () => {
 
   const handleAddToCart = async () => {
     try {
-      const response = await addItemToCart(product.id, user, 1); // Supongamos que estamos agregando 1 producto
+      const response = await addItemToCart(product.id, user); // Supongamos que estamos agregando 1 producto
       console.log("Producto agregado al carrito:", response);
       // Puedes mostrar un mensaje al usuario de que el producto fue agregado exitosamente
     } catch (error) {
@@ -44,7 +46,7 @@ const ProductDetail: React.FC = () => {
     <article className="d-flex">
       <section className="w-50">
         <img
-          src={`/products/${product.image}`}
+          src={`/products/${product.Colors[0]?.color_shoe.image}`}
           alt={product.model}
           width={"500px"}
         ></img>
@@ -64,8 +66,12 @@ const ProductDetail: React.FC = () => {
           <p className="productDetail"> {product.discount}% OFF</p>
         </div>
         <a href="">Ver medios de pago</a>
-        <p className="productDetail fw-semibold">Color: {product.color}</p>
-        <p className="productDetail fw-semibold">Talle: {product.size}</p>
+        <p className="productDetail fw-semibold">Color: 
+          {/* {product.color} */}
+          </p>
+        <p className="productDetail fw-semibold">Talle:
+          {/* {product.size} */}
+          </p>
         <p>Genero: {product.genre}</p>
         <p>Disponibles: {product.stock}</p>
         <button className="w-100" onClick={handleAddToCart}>

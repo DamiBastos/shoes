@@ -1,0 +1,7 @@
+.clickStyle:hover {
+    background-color: blue !important;
+  }
+
+.clickStyle:active {
+    background-color: green !important;
+  }

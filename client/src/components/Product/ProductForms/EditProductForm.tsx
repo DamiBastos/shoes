@@ -63,14 +63,14 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
         value={product.brand}
         onChange={handleChange}
       />
-      <InputField
+      {/* <InputField
         label="Color"
         type="text"
         name="color"
         id="color"
         value={product.color}
         onChange={handleChange}
-      />
+      /> */}
       <InputField
         label="Size"
         type="number"
@@ -102,14 +102,14 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
         value={product.stock}
         onChange={handleChange}
       />
-      <InputField
+      {/* <InputField
         label="Image"
         type="text"
         name="image"
         id="image"
         value={product.image}
         onChange={handleChange}
-      />
+      /> */}
       <InputField
         label="Price"
         type="number"

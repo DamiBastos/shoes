@@ -13,9 +13,12 @@ const CardList: React.FC = () => {
     const fetchData = async () => {
       const shoesData = await listShoes();
       setProducts(shoesData);
+
+      
     };
 
     fetchData();
+
   }, []);
 
   const handleEdit = (product: Product) => {
@@ -39,7 +42,7 @@ const CardList: React.FC = () => {
           <Card
             id={product.id}
             nombre={product.model}
-            imagen={product.image}
+            imagen={product.Colors[0]?.color_shoe.image}
             precio={product.price}
             descuento={product.discount}
             cuotas={product.stock}

@@ -20,64 +20,87 @@ const controllerCart = {
   },
   addItem: async (req, res) => {
     try {
-      const userId = req.body.user.id; // Supongo que obtienes el ID del usuario autenticado de alguna manera
-      const { productId, quantity } = req.body; // Obtén los detalles del ítem del cuerpo de la solicitud
-
-      // Encuentra el carrito del usuario
+      const userId = req.body.user.id;
+      const { productId } = req.body;
+  
       let cart = await db.Cart.findOne({ where: { user_id: userId } });
-
+  
       if (!cart) {
-        // Si no existe un carrito, crea uno
         cart = await db.Cart.create({
           user_id: userId,
           items: [],
-          discounts: 0,
+          discount: 0,
           subtotal: 0,
           total: 0,
         });
       }
-
-      // Supongo que tienes un modelo de Producto para obtener detalles del producto
-      const product = await db.Shoe.findByPk(productId);
+  
+      const product = await db.Shoe.findByPk(productId, {
+        include: [
+          {
+            model: db.Color,
+            through: {
+              attributes: ['image']
+            }
+          },
+        ]        
+      });
+  
       if (!product) {
         return res.status(404).json({ error: "Producto no encontrado" });
       }
-      console.log(product);
-      const existingItem = cart.items.find(
-        (item) => item.productId == productId
-      );
+  
+      // Buscar si el producto ya existe en el carrito
+      let existingItemIndex = cart.items.findIndex(item => item.productId === productId);
+  
+      let updatedItems = [...cart.items]; // Crear una copia del array de items
+  
+      if (existingItemIndex !== -1) {
+        // Si el producto ya existe, incrementar la cantidad
+        let updatedItem = { ...updatedItems[existingItemIndex] }; // Crear una copia del objeto item
+        updatedItem.quantity += 1;
+        updatedItem.price = updatedItem.price * updatedItem.quantity;
 
-      // Crea un nuevo ítem
-      if (existingItem) {
-        existingItem.quantity += quantity;
+        updatedItems[existingItemIndex] = updatedItem; // Reemplazar el item en la copia del array
       } else {
+        // Si el producto no existe, agregar un nuevo ítem
         const newItem = {
           productId,
-          quantity,
+          quantity: 1,
+          image: product.Colors[0].color_shoe.image,
+          unit_price: product.price,
           price: product.price,
           name: product.model,
-          image: product.image,
         };
-        // Agregar el ítem al carrito
-        const updatedItems = [...cart.items, newItem];
-        cart.items = updatedItems;
+        updatedItems = [...updatedItems, newItem]; // Agregar el nuevo ítem a la copia del array
       }
-
-      // Calcula los nuevos subtotales y totales
-      cart.subtotal += product.price * quantity;
-      cart.total = cart.subtotal - cart.discounts; // Ajusta según tu lógica de descuentos
-
-      // Guarda el carrito actualizado
+  
+      // Recalcular subtotal y total
+      const calculatedSubtotal = updatedItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+  
+      cart.subtotal = calculatedSubtotal;
+      cart.total = calculatedSubtotal - cart.discount;
+  
+      // Actualizar los items del carrito con la nueva copia modificada
+      cart.items = updatedItems;
+  
+      // Guardar el carrito actualizado
       await cart.save();
-
+  
+      console.log("Carrito guardado:", cart); // Verificar el carrito guardado
       return res.status(200).json({ cart });
     } catch (error) {
-      console.error(error);
+      console.error("Error al guardar el carrito:", error);
       return res
         .status(500)
         .json({ error: "Error al agregar ítem al carrito" });
     }
   },
+  
+  
   deleteItem: async (req, res) => {
     try {
       const { userId, productId } = req.body;

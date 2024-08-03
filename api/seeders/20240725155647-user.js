@@ -1,8 +1,9 @@
-"use strict";
-const bcrypt = require('bcrypt');
+'use strict';
+const bcrypt = require("bcrypt");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+
   async up(queryInterface, Sequelize) {
     const hashedPassword = await bcrypt.hash("123456", 10);
     // Insert Users
@@ -10,7 +11,7 @@ module.exports = {
       "Users",
       [
         {
-          name: "Damián Bastos",
+          username: "Damián Bastos",
           email: "damian.bastos@yahoo.com",
           phone: "1170190832",
           isAdmin: true,
@@ -19,7 +20,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          name: "Usuario Prueba",
+          username: "Usuario Prueba",
           email: "usuario_prueba@email.com",
           phone: "1112341234",
           isAdmin: false,
@@ -44,8 +45,8 @@ module.exports = {
       [
         {
           user_id: userId,
-          items: JSON.stringify([]), // Assuming no items initially
-          discounts: 0,
+          items: JSON.stringify([]),
+          discount: 0,
           subtotal: 0,
           total: 0,
           createdAt: new Date(),
@@ -56,16 +57,12 @@ module.exports = {
     );
   },
 
-  async down(queryInterface, Sequelize) {
-    // Delete the cart for 'Usuario Prueba'
-    const [usuarioPrueba] = await queryInterface.sequelize.query(
-      `SELECT id FROM Users WHERE email = 'usuario_prueba@email.com'`
-    );
-
-    const userId = usuarioPrueba[0].id;
-
-    await queryInterface.bulkDelete("Carts", { user_id: userId }, {});
-    // Delete Users
-    await queryInterface.bulkDelete("Users", null, {});
-  },
+  async down (queryInterface, Sequelize) {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+  }
 };

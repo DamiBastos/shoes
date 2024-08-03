@@ -9,7 +9,6 @@ var  generateToken  = require("../middlewares/generateToken")
 const controllerUser = {
   list: async (req, res) => {
     const users = await db.User.findAll();
-    console.log(users);
     return res.status(200).json({ users });
   },
   login: async (req, res) => {

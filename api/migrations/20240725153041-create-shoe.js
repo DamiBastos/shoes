@@ -10,42 +10,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       model: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING
       },
       brand: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      color: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      size: {
-        type: Sequelize.DOUBLE,
-        allowNull: false,
+        type: Sequelize.STRING
       },
       genre: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING
       },
       stock: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      image: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.INTEGER
       },
       price: {
-        type: Sequelize.DOUBLE,
-        allowNull: false,
+        type: Sequelize.INTEGER
       },
       discount: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       provider: {
         type: Sequelize.STRING

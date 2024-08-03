@@ -1,25 +1,19 @@
-"use strict";
+'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     *  */
+
     await queryInterface.bulkInsert(
       "Shoes",
       [
         {
-          model: "New Balance Azul",
+          model: "New Balance Classic",
           brand: "New Balance",
-          color: "Azul",
-          size: "45",
-          genre: "Hombre",
+          genre: "unisex",
           description: "Prueba stock",
           stock: 10,
-          image: "product-1.jpg",
           price: 60000.0,
           discount: 15,
           provider:"Proveedor 1",
@@ -27,14 +21,11 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          model: "New Balance Tricolor",
-          brand: "New Balance",
-          color: "Gris",
-          size: "40",
-          genre: "Hombre",
+          model: "Nike Boots",
+          brand: "Nike",
+          genre: "unisex",
           description: "Prueba stock",
           stock: 10,
-          image: "product-2.jpg",
           price: 70000.0,
           discount: 20,
           provider:"Proveedor 1",
@@ -42,47 +33,38 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          model: "New Balance Beige",
-          brand: "New Balance",
-          color: "Beige",
-          size: "38",
-          genre: "Hombre",
+          model: "Nike Classic",
+          brand: "Nike",
+          genre: "unisex",
           description: "Prueba stock",
           stock: 10,
-          image: "product-3.jpg",
           price: 40000.0,
           discount: 10,
-          provider:"Proveedor 1",
+          provider:"Proveedor 2",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          model: "New Balance Negra",
-          brand: "New Balance",
-          color: "Negro",
-          size: "45",
-          genre: "Hombre",
+          model: "Vans Classic",
+          brand: "Vans",
+          genre: "unisex",
           description: "Prueba stock",
           stock: 10,
-          image: "product-4.jpg",
           price: 80000.0,
           discount: 5,
-          provider:"Proveedor 2",
+          provider:"Proveedor 3",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          model: "New Balance Rosa",
-          brand: "New Balance",
-          color: "Turqueza",
-          size: "35",
-          genre: "Mujer",
+          model: "Converse Classic",
+          brand: "Converse",
+          genre: "unisex",
           description: "Prueba stock",
           stock: 10,
-          image: "product-5.jpg",
           price: 70000.0,
           discount: 15,
-          provider:"Proveedor 2",
+          provider:"Proveedor 4",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -91,13 +73,12 @@ module.exports = {
     );
   },
 
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("Shoes", null, {});
-  },
+  }
 };

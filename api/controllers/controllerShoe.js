@@ -5,7 +5,24 @@ const { Op } = require("sequelize");
 const controllerShoe = {
   list: async (req, res) => {
     try {
-      const shoes = await db.Shoe.findAll();
+      const shoes = await db.Shoe.findAll(
+        {
+          include: [
+            {
+              model: db.Color,
+              through: {
+                attributes: ['image']
+              }
+            },
+            {
+              model: db.Size,
+              through: {
+                attributes: [] 
+              }
+            }
+          ]
+        }
+      );
       if (shoes) {
         return res.status(200).json({ shoes });
       } else {
@@ -17,7 +34,21 @@ const controllerShoe = {
   },
   findByPk: async (req, res) => {
     const { id } = req.params;
-    const shoe = await db.Shoe.findByPk(id);
+    const shoe = await db.Shoe.findByPk(id,
+      {
+        include: [
+          {
+            model: db.Color,
+            through: {
+              attributes: ['image'] 
+            }
+          },
+          {
+            model: db.Size,
+          }
+        ]
+      }
+    );
     if (shoe) {
       return res.status(200).json({ shoe });
     } else {

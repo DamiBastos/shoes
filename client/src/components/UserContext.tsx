@@ -16,8 +16,8 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [cart, setCart] = useState(null);
-  const [shopList, setShopList] = useState(null);
+  const [cart, setCart] = useState<any>(null); // Especifica el tipo si es posible
+  const [shopList, setShopList] = useState<any>(null); // Especifica el tipo si es posible
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -27,35 +27,47 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   }, []);
 
-  const fetchCart = async () => {
-    if (user) {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/carts/${user.id}`
-        );
-        setCart(response.data.cart);
-      } catch (error) {
-        console.error("Error fetching cart:", error);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      
+      if (user && !user.isAdmin) {
+        await fetchCart();
+        await fetchShopList();
       }
+    };
+
+    fetchUserData();
+  }, [user]);
+
+  const fetchCart = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/carts/${user?.id}`
+      );
+      setCart(response.data.cart);
+
+    } catch (error) {
+      console.error("Error fetching cart:", error);
     }
   };
 
   const fetchShopList = async () => {
-    if (user) {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/users/shops/${user.id}`
-        );
-        setShopList(response.data);
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-      }
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/users/shops/${user?.id}`
+      );
+      setShopList(response.data);
+    } catch (error) {
+      console.error("Error fetching shop list:", error);
     }
   };
 
+  useEffect(() => {
+    // Este efecto se ejecutará cada vez que `cart` cambie.
+  }, [cart]);
 
   return (
-    <UserContext.Provider value={{ user, cart,shopList, fetchCart, fetchShopList }}>
+    <UserContext.Provider value={{ user, cart, shopList, fetchCart, fetchShopList }}>
       {children}
     </UserContext.Provider>
   );

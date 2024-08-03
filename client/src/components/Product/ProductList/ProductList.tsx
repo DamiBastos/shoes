@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Product } from "../../../types";
 import EditProductModal from "../ProductForms/EditProductModal";
 import { listShoes, productDelete } from "../../../api/shoes";
+import { Color } from "../../../types";
 
 const ProductList: React.FC = () => {
   const [shoes, setShoes] = useState<Product[] | null>(null);
@@ -68,17 +69,25 @@ const ProductList: React.FC = () => {
         <th className="p-1">ACCIONES</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="">
         {shoes?.map((shoe:any, index: number) => (
-            <tr key={index}>
+            <tr className="" key={index}>
                 <td className="p-1">{shoe.model}</td>
             <td className="p-1">{shoe.brand}</td>
-            <td className="p-1">{shoe.color}</td>
+            {/* <td className="rounded" style={{"backgroundColor":shoe.Colors[0].name}}>{shoe.Colors[0].name}</td> */}
+            <td className="d-flex justify-content-center align-items-center border">
+            {
+              shoe.Colors ? shoe.Colors.map((color:Color) => (
+                <div className="rounded p-1" style={{"backgroundColor":color.name,"color":color.name}}>-</div>
+              ))
+              : null
+            }
+            </td>
         <td className="p-1">{shoe.genre}</td>
         <td className="p-1">{shoe.description}</td>
-        <td className="p-1">{shoe.size}</td>
+        <td className="p-1">{shoe.Sizes[0].number} - {shoe.Sizes[shoe.Sizes.length - 1].number}</td>
         <td className="p-1">{shoe.stock}</td>
-        <td className="p-1">        <img src={`/products/${shoe.image}`} alt={shoe.model} width={"100px"} />
+        <td className="p-1">        <img src={`/products/${shoe?.Colors[0]?.color_shoe.image}`} alt={shoe.model} width={"100px"} />
         </td>
         <td className="p-1">{shoe.provider}</td>
         <td className="p-1">{shoe.discount}</td>

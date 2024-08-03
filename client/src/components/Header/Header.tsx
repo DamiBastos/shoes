@@ -14,6 +14,9 @@ const Header: React.FC = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+  }, [cart]);
+
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -43,7 +46,7 @@ const Header: React.FC = () => {
               <div className="d-flex align-items-center">
                 {!user.isAdmin ? <a href="/shops">Mis compras</a> : null}
               </div>
-              <div className="usuario-card">{user.name}</div>
+              <div className="usuario-card">{user.username}</div>
               <button onClick={handleLogout} className="btn btn-link">
                 <i className="bi bi-box-arrow-left text-black"></i>
               </button>
@@ -81,24 +84,25 @@ const Header: React.FC = () => {
             />
           </div>
           {user && !user.isAdmin ? (
-            <div className="d-flex flex-column align-items-center justify-content-between">
+            <div className="d-flex flex-column align-items-center justify-content-between position-relative">
+              {cart?.items.length > 0 ? (
+                <span className="cart-count badge badge-danger position-absolute top-0 start-100 translate-middle">
+                  {cart?.items.length}
+                </span>
+              ) : null}
               <i
                 className="bi bi-cart3"
                 onClick={handleOpenCart}
                 style={{ cursor: "pointer" }}
               ></i>
-              <h6 className="">$0,00</h6>
+              <h6 className="">${cart?.total}</h6>
             </div>
           ) : (
             ""
           )}
         </section>
       </article>
-      <CartSidebar
-        show={showCart}
-        handleClose={handleCloseCart}
-        products={cart}
-      />
+      <CartSidebar show={showCart} handleClose={handleCloseCart} products={cart} />
     </header>
   );
 };

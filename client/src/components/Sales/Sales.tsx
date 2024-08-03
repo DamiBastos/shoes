@@ -10,11 +10,15 @@ const Sales: React.FC = () => {
 
   const fetchSales = async () => {
     const shopsData = await listShops();
-    setSales(shopsData.purchases);
+    setSales(shopsData);
+    console.log("sales en componente sales:", sales);
+
   };
 
   useEffect(() => {
     fetchSales();
+    console.log("sales en componente sales:", sales);
+    
   }, []);
 
   const handleEdit = (sale: Shop) => {
@@ -66,7 +70,7 @@ const Sales: React.FC = () => {
                     <td className="p-1">{shop.state_purchase}</td>
                     <td className="p-1">{shop.type_ship}</td>
                     <td className="p-1">{shop.type_payment}</td>
-                    <td className="p-1">{shop.items.length}</td>
+                    <td className="p-1">{shop.ítems.length}</td>
                     <td className="p-1">{shop.subtotal}</td>
                     <td className="p-1">{shop.total}</td>
                     <td className="p-1">

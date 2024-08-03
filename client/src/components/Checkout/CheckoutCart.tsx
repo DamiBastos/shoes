@@ -1,5 +1,6 @@
 import React from "react";
 import { useUser } from "../UserContext";
+import { Product } from "../../types";
 
 const CheckoutCart: React.FC = () => {
   const { cart } = useUser();
@@ -16,12 +17,12 @@ const CheckoutCart: React.FC = () => {
               className="list-group-item d-flex justify-content-between align-items-center"
             >
               <div className="d-flex justify-content-between">
-                <img
+                {/* <img
                   className=""
                   src={`/products/${product.image}`}
                   alt={product.name}
                   width={"50px"}
-                />
+                /> */}
                 <p>{product.name}</p>
                 <p>{product.price}</p>
               </div>

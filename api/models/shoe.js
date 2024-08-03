@@ -14,20 +14,47 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Shoe.init({
-    model: DataTypes.STRING,
-    brand: DataTypes.STRING,
-    color: DataTypes.STRING,
-    size: DataTypes.INTEGER,
-    genre: DataTypes.STRING,
-    description: DataTypes.STRING,
-    stock: DataTypes.INTEGER,
-    image: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    discount: DataTypes.INTEGER,
-    provider: DataTypes.STRING
+    model: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    brand: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    genre: {
+      type: DataTypes.ENUM('male', 'female', 'unisex'),
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
+    price: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+    },
+    discount: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+    },
+    provider: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'Shoe',
   });
+  Shoe.associate = function(models) {
+    Shoe.belongsToMany(models.Color, { through: 'color_shoe', foreignKey: 'shoe_id' });
+    Shoe.belongsToMany(models.Size, { through: 'size_shoe', foreignKey: 'shoe_id' });
+  };
   return Shoe;
 };

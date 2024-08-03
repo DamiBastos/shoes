@@ -6,7 +6,7 @@ const controllerPurchase = {
   list: async (req, res) => {
     try {
       const purchases = await db.Purchase.findAll();
-      if (purchases.length > 0) {
+      if (purchases) {
         return res.status(200).json({ purchases });
       } else {
         return res.status(404).send("No hay compras que mostrar");
@@ -27,7 +27,7 @@ const controllerPurchase = {
   findByUser: async (req, res) => {
     const { id } = req.params;
     const purchase = await db.Purchase.findAll({ where: { user_id: id } });
-    if (purchase && purchase.length > 0) {
+    if (purchase) {
       return res.status(200).json({ purchase });
     } else {
       return res.status(404).send("No se encuentran compras");
@@ -48,7 +48,7 @@ const controllerPurchase = {
       city,
       type_payment,
       state_purchase,
-      items,
+      ítems,
       total,
       subtotal,
       user_id,
@@ -67,12 +67,22 @@ const controllerPurchase = {
       city,
       type_payment,
       state_purchase,
-      items,
+      ítems,
       total,
       subtotal,
       user_id,
     });
-    newPurchase.save();
+    // newPurchase.save();
+
+    // Encontrar el carrito del usuario y vaciarlo
+    let cart = await db.Cart.findOne({ where: { user_id } });
+    if (cart) {
+      cart.items = [];
+      cart.subtotal = 0;
+      cart.total = 0;
+      await cart.save();
+    }
+
     return res.status(200).json({ newPurchase });
   },
   edit: async (req, res) => {

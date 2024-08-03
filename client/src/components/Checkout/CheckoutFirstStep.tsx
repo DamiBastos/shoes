@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import InputField from "../InputField";
 
 interface CheckoutFirstStepProps {
   nextStep: () => void;
+  updateFormData: (data: object) => void;
 }
 
-const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep }) => {
+const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep, updateFormData }) => {
+
+  const [email, setEmail] = useState("");
+  const [postal_code, setPostal_code] = useState("");
+
+  const handleNextStep = () => {
+    // Actualizar los datos en formData
+    updateFormData({ email, postal_code });
+    // Ir al siguiente paso
+    nextStep();
+  };
+
   return (
     <div className="">
       <h6>Información de Contacto</h6>
@@ -15,19 +27,19 @@ const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep }) => {
         type="text"
         name="email"
         id="email"
-        value={null}
-        onChange={null}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       ></InputField>
       <InputField
-        label="ENTREGA"
+        label="Código Postal"
         type="text"
-        name="cp"
-        id="cp"
-        value={null}
-        onChange={null}
+        name="postal_code"
+        id="postal_code"
+        value={postal_code}
+        onChange={(e) => setPostal_code(e.target.value)}
       ></InputField>
-      <button onClick={nextStep}>Siguiente</button>
-    </div>
+      <button onClick={handleNextStep}>Siguiente</button>
+      </div>
   );
 };
 

@@ -15,7 +15,7 @@ const UserShops: React.FC = () => {
     return (
         <>
         <div>
-            Historial de compras: {user?.name}
+            Historial de compras: {user?.username}
             <div className="cart-sidebar-body d-flex flex-column justify-content-between border h-75">
         {shopList && shopList.purchase.length > 0 ? (
           <table className="">
@@ -50,7 +50,7 @@ const UserShops: React.FC = () => {
             <td className="p-1">{shop.state_purchase}</td>
             <td className="p-1">{shop.type_ship}</td>
             <td className="p-1">{shop.type_payment}</td>
-            <td className="p-1">{shop.items.length}</td>
+            <td className="p-1">{shop.ítems.length}</td>
             <td className="p-1">{shop.subtotal}</td>
             <td className="p-1">{shop.total}</td>
                 </tr>

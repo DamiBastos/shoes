@@ -1,5 +1,7 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Cart extends Model {
     /**
@@ -11,20 +13,32 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Cart.init(
-    {
-      user_id: DataTypes.NUMBER,
-      items: DataTypes.JSON,
-      discounts: DataTypes.DOUBLE,
-      subtotal: DataTypes.DOUBLE,
-      total: DataTypes.DOUBLE,
+  Cart.init({
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-    {
-      sequelize,
-      modelName: "Cart",
-    }
-  );
-
+    items: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
+    discount: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+    },
+    subtotal: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+    },
+    total: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+    },
+  }, {
+    sequelize,
+    modelName: 'Cart',
+  });
   Cart.associate = function (models) {
     Cart.belongsTo(models.User, {
       foreignKey: "user_id",

@@ -1,18 +1,29 @@
+import { Size } from "./Size";
+
 export interface Product {
   id: number;
   model: string;
   brand: string;
-  color: string;
   size: number;
   genre: string;
   description: string;
   stock: number;
-  image: string;
+  Colors: Color[];
+  Sizes: Size[];
   price: number;
   discount: number;
   provider: string;
   createdAt: string;
   updatedAt: string;
+}
+interface ColorShoe {
+  image: string;
+}
+
+export interface Color {
+  id: number;
+  name: string;
+  color_shoe: ColorShoe;
 }
 
 export interface CardProps {

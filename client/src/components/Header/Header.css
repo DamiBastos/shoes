@@ -25,3 +25,18 @@ li {
     font-size: 1.7em;
     color: black;
 }
+
+.cart-count {
+    background-color: red; /* Color de fondo de la notificación */
+    color: white;         /* Color del texto de la notificación */
+    border-radius: 50%;   /* Hacer que la notificación sea redonda */
+    padding: 0.5rem;      /* Añadir padding para hacer la notificación más grande */
+    font-size: 0.75rem;   /* Tamaño de la fuente */
+    line-height: 1;       /* Altura de línea */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;    /* Ancho mínimo para asegurar que el texto esté centrado */
+    height: 1.5rem;       /* Altura de la notificación */
+    transform: translate(-50%, -50%); /* Centrar la notificación */
+  }

@@ -1,6 +1,6 @@
 import { User } from "../types";
 
-export const addItemToCart = async (productId: number,user: User | null, quantity = 1) => {
+export const addItemToCart = async (productId: number,user: User | null) => {
     console.log("User en fetch",user);
     
   const response = await fetch('http://localhost:3000/carts/add', {
@@ -8,7 +8,7 @@ export const addItemToCart = async (productId: number,user: User | null, quantit
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ productId,user, quantity }),
+    body: JSON.stringify({ productId,user }),
   });
 
   if (!response.ok) {

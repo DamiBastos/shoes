@@ -16,7 +16,7 @@ export interface Shop {
   items:number,
   total:number,
   subtotal:number,
-  user_id:String | undefined,
+  user_id:string | undefined,
   createdAt: string;
   updatedAt: string;
 }

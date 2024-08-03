@@ -1,20 +1,4 @@
-// import CardList from "../../components/Product/ProductList/ProductList";
-// import Sales from "../../components/Sells/Sales";
-
-// const Dashboard: React.FC = () => {
-//   return (
-//     <div>
-//       <h1>Dashboard</h1>
-//       {/* <CardList /> */}
-//       <Sales/>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
 import React, { useState } from 'react';
-// import CardList from "../../components/Product/ProductList/CardList";
 import Sales from "../../components/Sales/Sales";
 import ProductList from '../../components/Product/ProductList/ProductList';
 
