@@ -15,7 +15,8 @@ const UserShops: React.FC = () => {
     return (
         <>
         <div>
-            Historial de compras: {user?.username}
+          <h3>            Historial de compras de {user?.username}
+          </h3>
             <div className="cart-sidebar-body d-flex flex-column justify-content-between border h-75">
         {shopList && shopList.purchase.length > 0 ? (
           <table className="">

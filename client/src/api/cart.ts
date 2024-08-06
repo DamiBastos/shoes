@@ -3,7 +3,7 @@ import { User } from "../types";
 export const addItemToCart = async (productId: number,user: User | null) => {
     console.log("User en fetch",user);
     
-  const response = await fetch('http://localhost:3000/carts/add', {
+  const response = await fetch('http://localhost:3000/cart/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

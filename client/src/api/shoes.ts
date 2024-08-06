@@ -2,12 +2,14 @@ import { Product } from "../types";
 
 export const listShoes = async (): Promise<Product[]> => {
   try {
-    const response = await fetch("http://localhost:3000/shoes");
+    const response = await fetch("http://localhost:3000/shoe");
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    return data.shoes; // Asegúrate de que `data.shoes` sea del tipo `Product[]`
+    console.log("Productos axios:", data.body);
+    
+    return data.body; 
   } catch (error) {
     console.error("Error fetching shoes:", error);
     return [];
@@ -16,12 +18,12 @@ export const listShoes = async (): Promise<Product[]> => {
 
 export const productDetail = async (id: string | undefined) => {
       try {
-        const response = await fetch(`http://localhost:3000/shoes/${id}`);
+        const response = await fetch(`http://localhost:3000/shoe/${id}`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        return data.shoe;
+        return data.body;
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -29,7 +31,7 @@ export const productDetail = async (id: string | undefined) => {
 
     export const productDelete = async (id: string | undefined) => {
       try {
-        const response = await fetch(`http://localhost:3000/shoes/delete/${id}`,
+        const response = await fetch(`http://localhost:3000/shoe/delete/${id}`,
           {
             method: 'DELETE', 
           }

@@ -8,18 +8,34 @@ const CardList: React.FC = () => {
   const [products, setProducts] = useState<Product[] | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+ 
   useEffect(() => {
     const fetchData = async () => {
-      const shoesData = await listShoes();
-      setProducts(shoesData);
-
-      
+      try {
+        const shoesData = await listShoes();
+        if (Array.isArray(shoesData)) {
+          setProducts(shoesData);
+          console.log("Productos en card list", shoesData);
+        } else {
+          console.log("La respuesta de los datos no es un array", shoesData);
+          throw new Error("La respuesta de los datos no es un array");
+        }
+      } catch (error: any) {
+        setError(error.message);
+        console.error("Error al cargar productos:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
-
   }, []);
+
+  if (loading) return <div>Cargando productos...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   const handleEdit = (product: Product) => {
     setSelectedProduct(product);

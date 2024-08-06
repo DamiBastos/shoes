@@ -1,7 +1,7 @@
 // src/api/auth.ts
 export const loginUser = async (email: string, password: string) => {
   try {
-    const response = await fetch("http://localhost:3000/users/login", {
+    const response = await fetch("http://localhost:3000/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export const loginUser = async (email: string, password: string) => {
       // Aquí puedes guardar el token en localStorage, sessionStorage o en el estado global de tu aplicación
       localStorage.setItem('token',token);
     }
-    return { ...data, token }; // Incluye el token en la respuesta para su uso inmediato si es necesario
+    return { ...data.body, token }; // Incluye el token en la respuesta para su uso inmediato si es necesario
 
   } catch (error) {
     if (error instanceof Error) {
@@ -41,7 +41,7 @@ export const registerUser = async (formData: {
   passwordConfirm: string;
 }) => {
   try {
-    const response = await fetch("http://localhost:3000/users/register", {
+    const response = await fetch("http://localhost:3000/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,9 @@ export const registerUser = async (formData: {
     }
 
     const data = await response.json();
-    return data;
+    console.log("Usuario login: ",data.body);
+    
+    return data.body;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error("Error en el registro: " + error.message);

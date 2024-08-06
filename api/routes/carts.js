@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const controllerCart = require("../controllers/controllerCart");
+const { add, get, empty } = require("../controllers/cart");
 
-/* GET users listing. */
-router.get("/:userId", controllerCart.getCart);
-router.post("/add", controllerCart.addItem);
-router.put("/empty", controllerCart.emptyCart);
+/* GET carts listing. */
+router.get("/:userId", get);
+router.post("/add", add);
+router.put("/empty", empty);
 
 module.exports = router;

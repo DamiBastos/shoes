@@ -21,6 +21,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    console.log("User:", storedUser);
+    
     if (storedUser) {
       const parsedUser: User = JSON.parse(storedUser).user;
       setUser(parsedUser);
@@ -42,9 +44,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const fetchCart = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/carts/${user?.id}`
+        `http://localhost:3000/cart/${user?.id}`
       );
-      setCart(response.data.cart);
+      setCart(response.data.body.cart);
 
     } catch (error) {
       console.error("Error fetching cart:", error);
@@ -54,9 +56,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const fetchShopList = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/users/shops/${user?.id}`
+        `http://localhost:3000/users/shop/${user?.id}`
       );
-      setShopList(response.data);
+      setShopList(response.data.body);
     } catch (error) {
       console.error("Error fetching shop list:", error);
     }

@@ -49,7 +49,7 @@ const controllerUser = {
   register: async (req, res) => {
     const transaction = await db.sequelize.transaction();
     try {
-      const { name, phone, email, rol, isAdmin } = req.body;
+      const { name, phone, email,  isAdmin } = req.body;
 
       const salt = await bcrypt.genSalt(10);
       const password = await bcrypt.hash(req.body.password, salt);

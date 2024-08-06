@@ -28,10 +28,10 @@ const LoginForm: React.FC = () => {
       const data = await loginUser(formData.email, formData.password);
 
       // Supongamos que el servidor responde con el usuario y un token
-      console.log("Login successful", data);
+      console.log("Login successful", data.body);
 
       // Guardar el usuario (o token) en el almacenamiento local o en el estado de la aplicación
-      localStorage.setItem("user", JSON.stringify(data.data));
+      localStorage.setItem("user", JSON.stringify(data));
 
       // Reset error
       setError(null);
