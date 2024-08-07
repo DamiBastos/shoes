@@ -1,56 +1,54 @@
-const { ErrorObject } = require('../helpers/error')
+const { ErrorObject } = require("../helpers/error");
 const db = require("../models/index");
 
-const { Shoe } = db
+const { Purchase, Cart, User } = db;
 
-exports.postShoe = async (shoe) => {
-    try {
-      const newShoe = await Shoe.create(shoe)
-      return newShoe
-    } catch (error) {
-      throw new ErrorObject(error.message, error.statusCode || 500)
-    }
-  }
-
-exports.getShoes = async () =>{
-    try {
-      const shoes = await Shoe.findAll()
-      return shoes
-    } catch (error) {
-      throw new ErrorObject(error.message, error.statusCode || 500)
-    }
-}
-
-exports.getShoe = async (id) =>{
+exports.postPurchase = async (body, user_id) => {
   try {
-    const shoe = await Shoe.findOne({ where: { id } })    
-    if (!shoe) {
-      throw new ErrorObject('Zapato no encontrado', 404);
+    let user = await User.findOne({ where: { id:user_id } });
+    console.log("usuario que compra:", user);
+    if(!user){
+      throw new ErrorObject("Usuario no encontrado", 400 || 500);
     }
-      return shoe
-  } catch (error) {
-    throw new ErrorObject(error.message, error.statusCode || 500)
-  }
-}
+    const newPurchase = await Purchase.create(body)
+    let cart = await Cart.findOne({ where: { user_id:user_id } });
+    if (cart) {
+      cart.items = [];
+      cart.subtotal = 0;
+      cart.total = 0;
+      await cart.save();
+    }
 
-exports.updateShoe = async (id, body) => {
+    return newPurchase
+  } catch (error) {
+    console.error("Error al guardar el carrito:", error);
+    throw new ErrorObject(error.message, error.statusCode || 500);
+  }
+};
+
+exports.getPurchase = async (id) => {
   try {
-    const shoe = await Shoe.findByPk(id)
-    if (!shoe) {
-      throw new ErrorObject('ShoeId updated failed', 404)
-    }
-    await shoe.update(body)
-    return shoe
+    let cart = await Purchase.findOne({ where: { id} });
+    return cart;
   } catch (error) {
-    throw new ErrorObject(error.message, error.statusCode || 500)
+    throw new ErrorObject(error.message, error.statusCode || 500);
   }
-}
+};
 
-exports.deleteShoe = async (id) => {
-  const shoe = await Shoe.findByPk(id)
-  if (shoe) {
-    Shoe.destroy({ where: { id: shoe.id } })
-  } else {
-    throw new ErrorObject('Shoe deleted failed', 404)
+exports.getPurchaseByUser = async (userId) => {
+  try {
+    let cart = await Purchase.findAll({ where: { user_id:userId} });
+    return cart;
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500);
   }
-}
+};
+
+exports.listPurchases = async () => {
+  try {
+    let cart = await Purchase.findAll();
+    return cart;
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500);
+  }
+};

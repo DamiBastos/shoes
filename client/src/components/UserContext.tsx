@@ -20,9 +20,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [shopList, setShopList] = useState<any>(null); // Especifica el tipo si es posible
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    console.log("User:", storedUser);
-    
+    const storedUser = localStorage.getItem("user");    
     if (storedUser) {
       const parsedUser: User = JSON.parse(storedUser).user;
       setUser(parsedUser);
@@ -56,7 +54,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const fetchShopList = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/users/shop/${user?.id}`
+        `http://localhost:3000/purchase/user/${user?.id}`
       );
       setShopList(response.data.body);
     } catch (error) {

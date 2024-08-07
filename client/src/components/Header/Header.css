@@ -40,3 +40,66 @@ li {
     height: 1.5rem;       /* Altura de la notificación */
     transform: translate(-50%, -50%); /* Centrar la notificación */
   }
+
+  @media (max-width: 768px)  {
+    /* Estilos para tablets */
+
+    .header__nav {
+        display: none !important;
+      }
+
+    .header__sesion {
+        justify-content: space-between !important;
+    }
+  
+    .logo {
+      font-size: 2.5rem; 
+    }
+  
+    .usuario-card {
+      font-size: 1.4rem;
+      padding: 0.3rem 0.5rem; 
+    }
+  
+    .bi-cart3,
+    .bi-search {
+      font-size: 1.5em; /* Ajustar tamaño de los íconos */
+    }
+  
+    .cart-count {
+      font-size: 0.7rem; /* Ajustar tamaño de la fuente en notificación */
+      padding: 0.4rem; /* Ajustar padding */
+    }
+  }
+
+  @media (max-width: 320px) {
+    /* Estilos para móviles */
+
+    .header__nav {
+        display: none !important;      
+        }
+
+        .header__search {
+          display: none !important;      
+          }
+  
+    .logo {
+      font-size: 2rem; /* Ajustar tamaño de la fuente para logo */
+    }
+  
+    .usuario-card {
+      font-size: 1.2rem; /* Ajustar tamaño de la fuente para tarjetas de usuario */
+      padding: 0.2rem 0.4rem; /* Ajustar padding */
+    }
+  
+    .bi-cart3,
+    .bi-search {
+      font-size: 1.3em; /* Ajustar tamaño de los íconos */
+    }
+  
+    .cart-count {
+      font-size: 0.65rem; /* Ajustar tamaño de la fuente en notificación */
+      padding: 0.3rem; /* Ajustar padding */
+    }
+  }
+  

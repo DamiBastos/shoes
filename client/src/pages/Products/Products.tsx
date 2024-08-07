@@ -3,9 +3,9 @@ import CardList from "../../components/Product/ProductList/CardList"
 const Products : React.FC = () => {
 
 return (
-    <div>
+    <div className="w-100">
         <CardList/>
-    </div>
+        </div>
 )
 }
 

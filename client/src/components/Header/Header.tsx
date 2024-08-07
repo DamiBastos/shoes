@@ -27,9 +27,9 @@ const Header: React.FC = () => {
   const handleCloseCart = () => setShowCart(false);
 
   return (
-    <header className="">
+    <header className="w-100">
       <article className="px-5 d-flex justify-content-between shadow-sm bg-body-tertiary rounded align-items-center">
-        <section className="d-flex gap-2">
+        <section className="header__nav d-flex gap-2">
           <a href="tel:1150042472" className="text-black">
             1150042472
           </a>
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
             <a href="/admin/dashboard">Administrar</a>
           ) : null}
           {user ? (
-            <div className="d-flex align-items-center justify-content">
+            <div className="header__sesion d-flex align-items-center justify-content">
               <div className="d-flex align-items-center">
                 {!user.isAdmin ? <a href="/shops">Mis compras</a> : null}
               </div>
@@ -59,13 +59,13 @@ const Header: React.FC = () => {
           )}
         </section>
       </article>
-      <article className="py-2 px-5 d-flex justify-content-between align-items-center shadow-sm bg-body-tertiary rounded">
-        <section className="px-5">
+      <article className="w-100 py-2 px-3 d-flex justify-content-between align-items-center shadow-sm bg-body-tertiary">
+        <section className="px-1">
           <a className="logo" href="/">
             SHOP-SHOES
           </a>
         </section>
-        <nav className="d-flex gap-2">
+        <nav className="header__nav d-flex gap-2">
           <a href="/">Inicio</a>
           <a href="/productos">Productos</a>
           <a href="/kids">Kids</a>
@@ -73,7 +73,7 @@ const Header: React.FC = () => {
           <a href="/mujer">Mujer</a>
         </nav>
         <section className="d-flex justify-content-between align-items-center">
-          <div className="d-flex mx-5 px-2 border rounded-pill">
+          <div className="header__search d-flex mx-5 px-2 border rounded-pill">
             <a href="">
               <i className="bi bi-search"></i>
             </a>

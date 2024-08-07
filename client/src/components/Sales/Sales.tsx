@@ -11,13 +11,11 @@ const Sales: React.FC = () => {
   const fetchSales = async () => {
     const shopsData = await listShops();
     setSales(shopsData);
-    console.log("sales en componente sales:", sales);
 
   };
 
   useEffect(() => {
     fetchSales();
-    console.log("sales en componente sales:", sales);
     
   }, []);
 

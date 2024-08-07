@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./CartSidebar.css";
 import { CartSidebarProps } from "../../types/CartSidebarProps";
-import Products from "../../pages/Products/Products";
+import { emptyCart } from "../../api/cart";
+import { useUser } from "../UserContext";
 
 const CartSidebar: React.FC<CartSidebarProps> = ({
   show,
   handleClose,
   products,
-    
 }) => {
+  const [cart, setCart] = useState([]);
+
+  const { user } = useUser();
+
+  const handleVaciarCarrito = async () => {
+    try {
+      const empty = await emptyCart(user?.id);
+      setCart([]);
+     
+    } catch (error) {
+      console.error("Error al vaciar el carrito:", error);
+    }
+  };
+
   return (
     <div className={`cart-sidebar ${show ? "open" : ""}`}>
       <div className="d-flex">
@@ -29,7 +43,6 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
             </thead>
             <tbody>
               {products.items.map((product, index) => (
-                
                 <tr key={index}>
                   <td className="d-flex p-1 align-items-center">
                     {/* <img
@@ -52,20 +65,36 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
           <p>No hay productos en el carrito.</p>
         )}
         <div className="d-flex flex-column gap-3 border rounded">
-          <div className="bg-black text-light">TOTAL: ${products && products.total ? products.total : "0"}</div>
-          <a 
-          href="/payment" 
-          className={`border p-1 rounded text-light ${products?.items.length < 1 ? 'disabled-link bg-secondary' : 'bg-dark'}`}
-          onClick={(e) => {
-            if (products.items.length < 1) {
-              e.preventDefault(); // Evita la navegación si el carrito está vacío
-            }
-          }}
+          <div className="bg-black text-light">
+            TOTAL: ${products && products.total ? products.total : "0"}
+          </div>
+          <a
+            href="/payment"
+            className={`border p-1 rounded text-light ${
+              products?.items.length < 1
+                ? "disabled-link bg-secondary"
+                : "bg-dark"
+            }`}
+            onClick={(e) => {
+              if (products.items.length < 1) {
+                e.preventDefault(); // Evita la navegación si el carrito está vacío
+              }
+            }}
           >
-          CONFIRMAR COMPRA
-        </a>
+            CONFIRMAR COMPRA
+          </a>
+          <button
+            className={`border p-1 rounded text-light ${
+              products?.items.length < 1
+                ? "disabled-link bg-secondary"
+                : "bg-dark"
+            }`}
+            disabled={products?.items.length < 1}
+            onClick={handleVaciarCarrito}
+          >
+            VACIAR CARRITO
+          </button>
         </div>
-       
       </div>
     </div>
   );

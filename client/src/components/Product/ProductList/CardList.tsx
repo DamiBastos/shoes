@@ -18,9 +18,7 @@ const CardList: React.FC = () => {
         const shoesData = await listShoes();
         if (Array.isArray(shoesData)) {
           setProducts(shoesData);
-          console.log("Productos en card list", shoesData);
         } else {
-          console.log("La respuesta de los datos no es un array", shoesData);
           throw new Error("La respuesta de los datos no es un array");
         }
       } catch (error: any) {
@@ -52,9 +50,9 @@ const CardList: React.FC = () => {
   }
 
   return (
-    <section className="d-flex flex-wrap align-items-center justify-content-center">
+    <section className="w-100 d-flex flex-wrap align-items-center justify-content-center">
       {products.map((product) => (
-        <ul key={product.id}>
+        <ul className="d-flex align-items-center justify-content-center" key={product.id}>
           <Card
             id={product.id}
             nombre={product.model}

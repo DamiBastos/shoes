@@ -42,10 +42,8 @@ const ProductDetail: React.FC = () => {
     try {
       setClicked(true);
 
-      const response = await addItemToCart(product.id, user); // Supongamos que estamos agregando 1 producto
+      const response = await addItemToCart(product.id, user?.id); // Supongamos que estamos agregando 1 producto
       console.log("Producto agregado al carrito:", response);
-
-   
       // Puedes mostrar un mensaje al usuario de que el producto fue agregado exitosamente
     } catch (error) {
       console.error("Error al agregar el producto al carrito:", error);

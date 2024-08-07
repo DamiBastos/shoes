@@ -1,37 +1,85 @@
 const createHttpError = require('http-errors')
 const { catchAsync } = require('../helpers/catchAsync')
 const { endpointResponse } = require('../helpers/success')
-const { postShoe } = require('../services/shoe')
+const { postPurchase, getPurchase, listPurchases, getPurchaseByUser } = require('../services/purchase');
 
-const list = catchAsync(async (req, res, next) => {
-})
 
 const post = catchAsync(async (req, res, next) => {
-    try {
-      const { body } = req
-      const response = await postShoe(body)
-      endpointResponse({
-        res,
-        message: 'Shoe created successfully',
-        body: response,
-      })
-    } catch (error) {
-      const httpError = createHttpError(
-        error.statusCode,
-        `[Error creating shoe] - [shoe - POST]: ${error.message}`,
-      )
-      next(httpError)
-    }
+  try {
+    const { user_id } = req.body;
+    const purchase = await postPurchase(req.body, user_id);
+
+    endpointResponse({
+      res,
+      message: 'Purchase added in successfully',
+      body: { purchase },
+    });
+
+  } catch (error) {
+    const httpError = createHttpError(
+      error.statusCode || 500,
+      `[Error adding purchase] - [purchase - POST]: ${error.message}`
+    );
+    next(httpError);
+  }
+});
+
+
+  const get = catchAsync(async (req, res, next) => {
+    try{
+      const{id} = req.params
+    const purchase = await getPurchase(id);
+    endpointResponse({
+      res,
+      message: 'Purchase retrieving in successfully',
+      body: { purchase },
+    });
+
+  } catch (error) {
+    const httpError = createHttpError(
+      error.statusCode || 500,
+      `[Error retrieving purchase] - [purchase - GET]: ${error.message}`
+    );
+    next(httpError);
+  }
   })
 
-  const put = catchAsync(async (req, res, next) => {
+
+  const getByUser = catchAsync(async (req, res, next) => {
+    try{
+      const{userId} = req.params
+    const purchase = await getPurchaseByUser(userId);
+    endpointResponse({
+      res,
+      message: 'Purchase retrieving in successfully',
+      body: { purchase },
+    });
+
+  } catch (error) {
+    const httpError = createHttpError(
+      error.statusCode || 500,
+      `[Error retrieving purchase] - [purchase - GET]: ${error.message}`
+    );
+    next(httpError);
+  }
   })
 
-  const findById = catchAsync(async (req, res, next) => {
+  const list = catchAsync(async (req, res, next) => {
+    try{
+    const purchase = await listPurchases();
+    endpointResponse({
+      res,
+      message: 'Purchases retrieving in successfully',
+      body: { purchase },
+    });
+  } catch (error) {
+    const httpError = createHttpError(
+      error.statusCode || 500,
+      `[Error retrieving in purchases] - [purchase - GET]: ${error.message}`
+    );
+    next(httpError);
+  }
   })
 
-  const destroy = catchAsync(async (req, res, next) => {
-  })
 
-
-  module.exports = { post, put, findById, destroy, list}
+  module.exports = { post, get, list, getByUser}

@@ -4,11 +4,12 @@ import Swal from 'sweetalert2';
 
 export const userListShop = async (id: string | undefined): Promise<Shop[]> => {
     try {
-      const response = await fetch(`http://localhost:3000/users/shops/${id}`);
+      const response = await fetch(`http://localhost:3000/purchase/user/${id}`);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
+      
       return data; 
     } catch (error) {
       console.error("Error fetching shoes:", error);
@@ -18,14 +19,12 @@ export const userListShop = async (id: string | undefined): Promise<Shop[]> => {
 
   export const listShops = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/purchases`);
+      const response = await fetch(`http://localhost:3000/purchase`);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      const data = await response.json();
-      console.log("purchases api: ",data.purchases);
-      
-      return data.purchases; 
+      const data = await response.json();      
+      return data.body.purchase; 
     } catch (error) {
       console.error("Error fetching shops:", error);
       return [];
@@ -34,7 +33,7 @@ export const userListShop = async (id: string | undefined): Promise<Shop[]> => {
 
   export const postPurchase = async (body: any) => {
     try {
-      const response = await fetch("http://localhost:3000/purchases/create", {
+      const response = await fetch("http://localhost:3000/purchase/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

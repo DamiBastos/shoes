@@ -10,7 +10,7 @@ interface CardFooterProps {
 const CardFooter: React.FC<CardFooterProps> = ({icon, principal, secondary}) => {
   return (
 <div
-  className="d-flex flex-column align-items-center justify-content-center text-center"
+  className="footer__card d-flex flex-column align-items-center justify-content-center text-center"
 >
   <div className="d-flex align-items-center justify-content-center">
     <i className={icon}></i>

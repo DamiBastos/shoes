@@ -3,8 +3,8 @@ import CardList from "../../components/Product/ProductList/CardList";
 
 const Home: React.FC = () => {
   return (
-    <main className="w-100">
-      <article className="w-100">
+    <main className="">
+      <article className="">
         <div
           id="carouselExampleAutoplaying"
           className="carousel slide"
@@ -67,9 +67,9 @@ const Home: React.FC = () => {
           <a href="">Niños</a>
         </section>
       </article>
-      <article className="d-flex flex-column align-items-center justify-content-center">
+      <article className="w-100 d-flex flex-column align-items-center justify-content-center">
         <h3>DESTACADOS</h3>
-        <section className="d-flex flex-wrap align-items-center justify-content-center">
+        <section className="w-100 d-flex flex-wrap align-items-center justify-content-center">
           <CardList />
           <a href="">VER TODOS LOS PRODUCTOS</a>
         </section>

@@ -120,7 +120,7 @@ const Card: React.FC<CardProps> = ({
                                 </div> */}
                                 <div className="">
                                     <button type="button" className="btn btn-block btn-primary btn-circle ">
-                                    Add to cart
+                                    Ver detalle
                                     </button>
                                 </div>
                             </div>
