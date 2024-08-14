@@ -1,0 +1,25 @@
+
+@media (max-width:768px) {
+    .container__checkout{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title__checkout{
+        font-size: 1.5rem;
+    }
+
+    .body__checkout{
+        width: 100%;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8rem;
+    }
+
+    .body__cart{
+        width: 75% !important;
+    }
+}

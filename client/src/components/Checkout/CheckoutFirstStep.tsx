@@ -35,7 +35,7 @@ const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep, updateF
       {/* Formulario de contacto */}
 
       <InputField
-        label="DATOS DE CONTACTO"
+        label="Email de contacto"
         type="text"
         name="email"
         id="email"
@@ -51,9 +51,9 @@ const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep, updateF
         value={postal_code}
         onChange={(e) => setPostal_code(e.target.value)}
       ></InputField>
-            <ErrorMessage message={errors} />
+      <ErrorMessage message={errors} />
 
-      <button onClick={handleNextStep}>Siguiente</button>
+      <button className="m-1" onClick={handleNextStep}>Siguiente</button>
       </div>
   );
 };

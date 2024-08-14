@@ -2,19 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Product } from "../../types";
 import { productDetail } from "../../api/shoes";
-import { addItemToCart } from "../../api/cart"; // Importa la función para agregar al carrito
+import { addItemToCart } from "../../api/cart"; 
 import "./ProductDetail.css";
 import { useUser } from "../../components/UserContext";
+import { formatNumber } from "../../utils/formateNumber";
 
 interface RouteParams {
   id: string;
-  [key: string]: string | undefined; // Agregar firma de índice para permitir cualquier otro parámetro de URL
+  [key: string]: string | undefined; 
 }
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<RouteParams>();
   const [product, setProduct] = useState<Product | null>(null);
   const [clicked, setClicked] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(35);
+
 
   const { user } = useUser(); // Obtener el usuario desde el contexto
 
@@ -38,26 +41,27 @@ const ProductDetail: React.FC = () => {
     return <div>Cargando...</div>;
   }
 
+  const handleSizeSelect = (selectedSize: number) => {
+    setSelectedSize(selectedSize);
+  };
+
   const handleAddToCart = async () => {
     try {
       setClicked(true);
-
-      const response = await addItemToCart(product.id, user?.id); // Supongamos que estamos agregando 1 producto
-      console.log("Producto agregado al carrito:", response);
-      // Puedes mostrar un mensaje al usuario de que el producto fue agregado exitosamente
+      const response = await addItemToCart(product.id, user?.id, selectedSize); 
+      console.log("product:",product);
+      
     } catch (error) {
       console.error("Error al agregar el producto al carrito:", error);
-      // Manejar el error, mostrar un mensaje al usuario, etc.
     }
   };
 
   return (
-    <article className="d-flex">
-      <section className="w-50">
+    <article className="article-detail d-flex">
+      <section className="section__img w-50">
         <img
-          src={`/products/${product.Colors[0]?.color_shoe.image}`}
+          src={`${product.Colors[0]?.color_shoe.image}`}
           alt={product.model}
-          width={"500px"}
         ></img>
       </section>
       <section className="d-flex flex-column align-items-start w-50">
@@ -65,24 +69,29 @@ const ProductDetail: React.FC = () => {
           {product.model}
         </p>
         <p>{product.brand}</p>
-        <p className="productDetail text-decoration-line-through">
-          ${product.price}
-        </p>
         <div className="productDetail d-flex gap-1 align-items-end">
           <p className="productDetail fs-2 fw-semibold">
-            ${product.price - (product.price * product.discount) / 100}
+            ${formatNumber(product.price) }
           </p>
-          <p className="productDetail"> {product.discount}% OFF</p>
         </div>
-        <a href="">Ver medios de pago</a>
-        <p className="productDetail fw-semibold">Color: 
-          {/* {product.color} */}
-          </p>
-        <p className="productDetail fw-semibold">Talle:
-          {/* {product.size} */}
+        <div className="productDetail fw-semibold">Color: 
+          {product.Colors.map((color: any, index: number)=>(
+            <p key={index}>{color.name}</p>
+          ))}
+          </div>
+        <p className="productDetail d-flex  gap-1">Talle:
+          {product.Sizes?.map((size:any,index)=>(
+            <button
+            key={index}
+            className={`d-flex border rounded p-1 ${selectedSize === size ? "selected bg-light text-black" : ""}`}
+            onClick={() => handleSizeSelect(size)}
+          >
+            {size.number}
+          </button>
+          ))}
           </p>
         <p>Genero: {product.genre}</p>
-        <p>Disponibles: {product.stock}</p>
+        <p>Stock: {product.stock}</p>
         <button className={`w-100 ${clicked ? "bg-secondary" : "bg-black"}`}
       onClick={handleAddToCart}
       style={{ color: "white" }}>

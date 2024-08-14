@@ -1,4 +1,4 @@
 export interface Size {
     id: number;
-    number: number;
+    number?: number | undefined;
   }

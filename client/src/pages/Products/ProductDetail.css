@@ -2,3 +2,36 @@
     padding: 0 !important;
     margin: 0 !important;
 }
+
+.section__img{
+    width: 100%;
+}
+
+.section__img img{
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .article-detail{
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (min-width: 900px) {
+    .article-detail{
+        padding: 2rem;
+    }
+
+    .section__img{
+        width: 90%;
+    }
+    
+    .section__img img{
+        width: 90%;
+    }
+}
+

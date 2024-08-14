@@ -1,35 +1,54 @@
 const { ErrorObject } = require("../helpers/error");
 const db = require("../models/index");
+const sendMail = require("../utils/mailed");
 
 const { Shoe, Color, Size, color_shoe, size_shoe } = db;
 
 exports.postShoe = async (shoe) => {
   const transaction = await Shoe.sequelize.transaction();
-
   try {
-    const { colorIds, sizeIds, ...shoeDetails } = shoe;
+    const { Colors, Sizes,image, ...shoeDetails } = shoe;
     const newShoe = await Shoe.create(shoeDetails, { transaction });
-    // Asociar colores
-    if (colorIds && colorIds.length > 0) {
-      const colorAssociations = colorIds.map((colorId) => ({
+    if (Colors && Colors.length > 0) {
+      const colorAssociations = Colors.map((colorId, index) => ({
         shoe_id: newShoe.id,
         color_id: colorId,
-        image: "default.jpg",
+        image: index === 0 && image ? image : "notImage.jpg", // La imagen se asigna solo al primer color
       }));
       await color_shoe.bulkCreate(colorAssociations, { transaction });
+    } else {
+      const colorAssociations = [{
+        shoe_id: newShoe.id,
+        color_id: 1,
+        image: image ? image : "notImage.jpg",
+      }];
+      await color_shoe.bulkCreate(colorAssociations, { transaction });
     }
-
-    if (sizeIds && sizeIds.length > 0) {
-      const sizeAssociations = sizeIds.map((sizeId) => ({
+    if (Sizes && Sizes.length > 0) {
+      const sizeAssociations = Sizes.map((sizeId) => ({
         shoe_id: newShoe.id,
         size_id: sizeId,
       }));
       await size_shoe.bulkCreate(sizeAssociations, { transaction });
     }
 
+      // Manejo de asociaciones de tallas
+      const defaultSizeIds = Array.from({ length: 10 }, (_, i) => i + 6); // IDs del 5 al 14
+      const sizeAssociations = (Sizes || []).map((sizeId) => ({
+        shoe_id: newShoe.id,
+        size_id: sizeId,
+      }));
+      // Añadir asociaciones para las tallas del 5 al 14
+      const defaultSizeAssociations = defaultSizeIds.map((sizeId) => ({
+        shoe_id: newShoe.id,
+        size_id: sizeId,
+      }));
+      // Combina las asociaciones personalizadas con las predeterminadas
+      const allSizeAssociations = [...sizeAssociations, ...defaultSizeAssociations];
+      await size_shoe.bulkCreate(allSizeAssociations, { transaction });
+
     // // Confirmar la transacción
     await transaction.commit();
-    
     return newShoe;
 
   } catch (error) {
@@ -68,15 +87,15 @@ exports.getShoe = async (id) => {
       where: { id },
       include: [
         {
-          model: Color,
+          model: Color,through: color_shoe 
         },
         {
-          model: Size,
+          model: Size, through: size_shoe 
         },
       ],
     });
     if (!shoe) {
-      throw new ErrorObject("Zapato no encontrado", 404);
+      return null;
     }
     return shoe;
   } catch (error) {
@@ -90,6 +109,7 @@ exports.updateShoe = async (id, body) => {
     if (!shoe) {
       throw new ErrorObject("ShoeId updated failed", 404);
     }
+    
     await shoe.update(body);
     return shoe;
   } catch (error) {

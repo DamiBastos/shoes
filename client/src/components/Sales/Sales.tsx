@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Shop } from "../../types/Shop";
 import { listShops } from "../../api/shops";
 import EditSaleModal from "./SaleForms/SalesModal";
+import "./sales.css"
 
 const Sales: React.FC = () => {
   const [sales, setSales] = useState<Shop[] | null>(null);
@@ -40,41 +41,35 @@ const Sales: React.FC = () => {
               <thead>
                 <tr>
                   <th className="p-1">NOMBRE</th>
-                  <th className="p-1">APELLIDO</th>
-                  <th className="p-1">C/P</th>
-                  <th className="p-1">CIUDAD</th>
-                  <th className="p-1">BARRIO</th>
-                  <th className="p-1">CALLE</th>
-                  <th className="p-1">NÚMERO</th>
+                  <th className="p-1">ESTADO PAGO</th>
                   <th className="p-1">ESTADO ENVÍO</th>
-                  <th className="p-1">TIPO DE ENVÍO</th>
-                  <th className="p-1">TIPO DE PAGO</th>
-                  <th className="p-1">PRODUCTO/S</th>
-                  <th className="p-1">SUBTOTAL</th>
+                  <th className="p-1">PRODUCTOS</th>
                   <th className="p-1">TOTAL</th>
-                  <th className="p-1"></th>
+                  <th className="p-1">ACCIONES</th>
                 </tr>
               </thead>
               <tbody>
                 {sales?.map((shop: any, index: number) => (
                   <tr key={index}>
-                    <td className="p-1">{shop.name}</td>
-                    <td className="p-1">{shop.lastname}</td>
-                    <td className="p-1">{shop.postal_code}</td>
-                    <td className="p-1">{shop.city}</td>
-                    <td className="p-1">{shop.neighborhood}</td>
-                    <td className="p-1">{shop.street}</td>
-                    <td className="p-1">{shop.number_street}</td>
-                    <td className="p-1">{shop.state_purchase}</td>
-                    <td className="p-1">{shop.type_ship}</td>
-                    <td className="p-1">{shop.type_payment}</td>
-                    <td className="p-1">{shop.ítems.length}</td>
-                    <td className="p-1">{shop.subtotal}</td>
+                    <td className="p-1">{shop.name} {shop.lastname}</td>
+                    <td className="p-1">{shop.state_payment}</td>
+                    <td className="p-1">{shop.state_ship}</td>
+                    <td className="p-1">{shop.items.map((product:any, index:number) => (
+                      <div key={index}>
+                      <div>
+                        Producto: {product.name}
+                      </div>
+                      <div>
+                      Provedor: {product.provider}
+                    </div>
+                    </div>
+                    ))}</td>
+
                     <td className="p-1">{shop.total}</td>
                     <td className="p-1">
-                      <div className="custom-button">
+                      <div className="">
                         <button
-                          className="custom-button border p-1"
+                          className="rounded-button p-1"
                           onClick={() => handleEdit(shop)}
                         >
                           <i className="bi bi-pencil"></i>
@@ -86,10 +81,9 @@ const Sales: React.FC = () => {
               </tbody>
             </table>
           ) : (
-            <span>
-              Todavía no hiciste ninguna compra,{" "}
-              <a href="/">comienza ahora!</a>
-            </span>
+            <h2>
+              Todavía no hay ventas.{" "}
+            </h2>
           )}
         </div>
       </div>

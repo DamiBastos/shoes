@@ -2,7 +2,7 @@ export interface Shop {
   id:string;
   email:string,
   postal_code: string,
-  type_ship:string,
+  state_ship:string,
   name: string,
   lastname: string,
   phone: string,
@@ -11,8 +11,7 @@ export interface Shop {
   department: string,
   neighborhood: string,
   city: string,
-  type_payment: string,
-  state_purchase: string,
+  state_payment: string,
   items:number,
   total:number,
   subtotal:number,

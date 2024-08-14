@@ -7,8 +7,8 @@ const { addItem, getCart, emptyCart } = require('../services/cart');
 
 const add = catchAsync(async (req, res, next) => {
   try {
-    const { userId, productId } = req.body;
-    const cart = await addItem(userId, productId);
+    const { userId, productId, size } = req.body;
+    const cart = await addItem(userId, productId, size);
 
     endpointResponse({
       res,

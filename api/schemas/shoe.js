@@ -1,18 +1,18 @@
 exports.shoe = {
   model: {
     exists: {
-      errorMessage: "Name cannot be null",
+      errorMessage: "Model cannot be null",
     },
     notEmpty: {
-      errorMessage: "Description cannot be empty",
+      errorMessage: "Model cannot be empty",
     },
   },
   brand: {
     exists: {
-      errorMessage: "Name cannot be null",
+      errorMessage: "Brand cannot be null",
     },
     notEmpty: {
-      errorMessage: "Description cannot be empty",
+      errorMessage: "Brand cannot be empty",
     },
   },
   genre: {
@@ -20,15 +20,7 @@ exports.shoe = {
       errorMessage: "Genre cannot be null",
     },
     notEmpty: {
-      errorMessage: "Description cannot be empty",
-    },
-  },
-  description: {
-    exists: {
-      errorMessage: "Description cannot be null",
-    },
-    notEmpty: {
-      errorMessage: "Description cannot be empty",
+      errorMessage: "Genre cannot be empty",
     },
   },
   stock: {
@@ -36,7 +28,7 @@ exports.shoe = {
       errorMessage: "Stock cannot be null",
     },
     notEmpty: {
-      errorMessage: "Description cannot be empty",
+      errorMessage: "Stock cannot be empty",
     },
   },
   price: {
@@ -44,15 +36,7 @@ exports.shoe = {
       errorMessage: "Price cannot be null",
     },
     notEmpty: {
-      errorMessage: "Description cannot be empty",
-    },
-  },
-  discount: {
-    exists: {
-      errorMessage: "Discount cannot be null",
-    },
-    notEmpty: {
-      errorMessage: "Description cannot be empty",
+      errorMessage: "Price cannot be empty",
     },
   },
   provider: {
@@ -60,7 +44,7 @@ exports.shoe = {
       errorMessage: "Provider cannot be null",
     },
     notEmpty: {
-      errorMessage: "Description cannot be empty",
+      errorMessage: "Provider cannot be empty",
     },
   },
 };

@@ -6,22 +6,24 @@ const SelectField: React.FC<SelectFieldProps> = ({
   options,
   name,
   id,
+  multiple = false,
   value,
   onChange,
 }) => {
   return (
-    <div className="form-group">
-      <label htmlFor={id}>{label}</label>
+    <div className="d-flex flex-column">
+        <label className='mb-3' htmlFor={id}>{label}</label>
       <select
-        className="form-control"
-        id={id}
+      className='bg-light mb-3 text-black'
         name={name}
+        id={id}
         value={value}
         onChange={onChange}
+        multiple={multiple}
       >
-        {options.map((option:string, index:number) => (
-          <option key={index} value={option}>
-            {option}
+        {options.map((option) => (
+          <option className='' key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>

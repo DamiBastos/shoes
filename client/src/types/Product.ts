@@ -1,35 +1,39 @@
 import { Size } from "./Size";
 
 export interface Product {
-  id: number;
+  id?: number;
   model: string;
   brand: string;
-  size: number;
+  size?: number;
   genre: string;
   description: string;
   stock: number;
-  Colors: Color[];
-  Sizes: Size[];
+  Colors: Color[] | string[] | never[] | ColorShoe | any;
+  Sizes?: Size[] | string[] | never[] | undefined | any;
   price: number;
+  image?:string;
   discount: number;
   provider: string;
-  createdAt: string;
-  updatedAt: string;
-}
-interface ColorShoe {
-  image: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Color {
   id: number;
-  name: string;
-  color_shoe: ColorShoe;
+  name: string | never;
+  color_shoe: ColorShoe | string;
+}
+
+interface ColorShoe {
+  image: string;
 }
 
 export interface CardProps {
-  id: number;
+  id: number | undefined;
   nombre: string;
   imagen: string;
+  talle: string;
+  marca: string;
   precio: number;
   descuento: number;
   cuotas: number;

@@ -14,7 +14,7 @@ const Home: React.FC = () => {
             <div className="carousel-item active">
               <img
                 className="d-block w-100"
-                src="/assets/carrusel.webp"
+                src="/assets/carr1.jpg"
                 alt="carrusel"
               />
             </div>
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
             <div className="carousel-item">
               <img
                 className="d-block w-100"
-                src="/assets/carrusel-2.webp"
+                src="/assets/carr2.jpg"
                 alt="carrusel-2"
               />
             </div>
@@ -61,10 +61,9 @@ const Home: React.FC = () => {
       <article className="d-flex flex-column align-items-center">
         <h4>CATEGORÍAS PRINCIPALES</h4>
         <section className="d-flex gap-1">
-          <a href="">Hombres</a>
-          <a href=""></a>
-          <a href="">Mujeres</a>
-          <a href="">Niños</a>
+          <a href="#productos">Hombres</a>
+          <a href="#productos">Mujeres</a>
+          <a href="#productos">Niños</a>
         </section>
       </article>
       <article className="w-100 d-flex flex-column align-items-center justify-content-center">

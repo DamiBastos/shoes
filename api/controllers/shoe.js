@@ -9,13 +9,13 @@ get: catchAsync(async (req, res, next) => {
     const response = await getShoes()
     endpointResponse({
       res,
-      message: 'Shoes retrieved successfuly',
+      message: 'Shoes retrieved successfully',
       body: response,
     })
   } catch (error) {
     const httpError = createHttpError(
-      error.statusCode,
-      `[Error retrieving comments] - [shoes - GET]: ${error.message}`,
+      error.statusCode || 500,
+      `[Error retrieving shoes] - [shoes - GET]: ${error.message}`,
     )
     next(httpError)
   }

@@ -1,7 +1,9 @@
+import { link } from ".";
+
 // src/api/auth.ts
 export const loginUser = async (email: string, password: string) => {
   try {
-    const response = await fetch("http://localhost:3000/user/login", {
+    const response = await fetch(`${link}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,14 +36,14 @@ export const loginUser = async (email: string, password: string) => {
 
 // src/api/auth.ts
 export const registerUser = async (formData: {
-  name: string;
+  username: string;
   email: string;
   phone: string;
   password: string;
   passwordConfirm: string;
 }) => {
   try {
-    const response = await fetch("http://localhost:3000/user/register", {
+    const response = await fetch(`${link}/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

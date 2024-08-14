@@ -5,7 +5,7 @@ import CheckoutFinalStep from "./CheckoutFinalStep";
 import CheckoutFirstStep from "./CheckoutFirstStep";
 import CheckoutSecondStep from "./CheckoutSecondStep";
 import CheckoutDetails from "./CheckoutDetails";
-import { FormData } from "../../types/formData";
+import { FormData } from "../../types/FormData";
 import { useUser } from "../UserContext";
 import { postPurchase } from "../../api/shops";
 
@@ -59,12 +59,15 @@ const CheckoutForm: React.FC = () => {
       ...formData.secondStepData,
       ...formData.thirdStepData,
       ...formData.finalStepData,
-      ítems: cart.items,
+      items: cart.items,
       subtotal: subtotal,
         total: total,
         user_id:user?.id
 
     };
+
+    console.log("Data final",combinedData);
+    
 
   postPurchase(combinedData)
   }
@@ -78,13 +81,8 @@ const CheckoutForm: React.FC = () => {
         (sum:number, item:any) => sum + item.price * item.quantity,
         0
       );
-  
-      // Suponiendo que hay un costo fijo de envío y un cálculo de impuestos
-      const shipping = 20; // Ejemplo de costo de envío
-      const taxes = calculatedSubtotal * 0.1; // Ejemplo de 10% de impuestos
-  
       setSubtotal(calculatedSubtotal);
-      setTotal(calculatedSubtotal + shipping + taxes);
+      setTotal(calculatedSubtotal);
   
     }
   }, [cart, user, setFormData]); // Dependencias actualizadas
@@ -94,7 +92,6 @@ const CheckoutForm: React.FC = () => {
 
   return (
     <div className="w-75 d-flex flex-column align-items-center border">
-      <h6>CHECKOUT FORM</h6>
       <div className="w-75">
         <StepIndicator step={step} />
         {step === 1 && <CheckoutFirstStep

@@ -122,8 +122,8 @@ const CheckoutThirdStep: React.FC<CheckoutThirdStepProps> = ({
         ></InputField>
               <ErrorMessage message={errors} />
 
-      <button onClick={prevStep}>Anterior</button>
-      <button onClick={handleNextStep}>Siguiente</button>
+      <button className="m-1" onClick={prevStep}>Anterior</button>
+      <button className="m-1" onClick={handleNextStep}>Siguiente</button>
     </div>
   );
 };

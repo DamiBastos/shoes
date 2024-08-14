@@ -4,13 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Purchase extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
     }
   }
   Purchase.init({
@@ -34,11 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    type_ship: {
-      type: DataTypes.ENUM('correo_argentino','andreani','local'),
-      allowNull: false,
-      defaultValue:'local'
-    },
     street: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -59,17 +48,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    type_payment: {
-      type: DataTypes.ENUM('cash','transfer','mercado_pago'),
+    state_payment: {
+        type: DataTypes.ENUM('Inicial','Pago','Cancelado'),
       allowNull: false,
-      defaultValue:'cash'
+      defaultValue:'Inicial'
     },
-    state_purchase: {
-      type: DataTypes.ENUM('initial','payed','shipped','completed','cancelated'),
+    state_ship: {
+      type: DataTypes.ENUM('Local','Enviado', 'Completado','Cancelado'),
       allowNull: false,
-      defaultValue:'initial'
+      defaultValue:'Local'    
     },
-    ítems: {
+    items: {
       type: DataTypes.JSON,
       allowNull: false,
     },

@@ -3,7 +3,7 @@ const db = require("../models/index");
 
 const { Shoe, Cart } = db;
 
-exports.addItem = async (userId, productId) => {
+exports.addItem = async (userId, productId, size) => {
   try {
     let cart = await Cart.findOne({ where: { user_id: userId } });
 
@@ -52,6 +52,8 @@ exports.addItem = async (userId, productId) => {
         unit_price: product.price,
         price: product.price,
         name: product.model,
+        size,
+        provider: product.provider
       };
       updatedItems = [...updatedItems, newItem];
     }

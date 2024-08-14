@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bodyfooter d-flex flex-column align-items-center">
       <article className="p-5 w-100 d-flex flex-column align-items-center">
-        <section>
+        {/* <section>
           <h4>SEGUINOS</h4>
         </section>
         <section className="p-5 d-flex align-items-center gap-1">
@@ -16,18 +16,18 @@ const Footer: React.FC = () => {
           <a className="bg-black rounded-circle" href="">
             <i className="d-flex align-items-center p-3 bi bi-facebook"></i>
           </a>
-        </section>
+        </section> */}
         <section className="w-100 d-flex justify-content-around">
           <CardFooter
             icon="p-1 bi bi-truck"
             principal="Enviamos tu compra"
             secondary="Entregas a todo el país"
           />
-          <CardFooter
+          {/* <CardFooter
             icon="p-1 bi bi-credit-card"
             principal="Pagá como quieras"
-            secondary="Tarjetas de crédito o efectivo"
-          />
+            secondary="Transferencia o efectivo"
+          /> */}
           <CardFooter
             icon="p-1 bi bi-lock"
             principal="Comprá con seguridad"
@@ -45,12 +45,7 @@ const Footer: React.FC = () => {
             <li>
               <a href="">Productos</a>
             </li>
-            <li>
-              <a href="">Kids</a>
-            </li>
-            <li>
-              <a href="">Politicas</a>
-            </li>
+            
             <li>
               <a href="">Contacto</a>
             </li>
@@ -63,16 +58,16 @@ const Footer: React.FC = () => {
           <h6>CONTACTANOS</h6>
           <ul className="p-0 d-flex flex-column align-items-start ">
             <li>
-              <i className="footer p-1 bi bi-telephone-fill"></i>1150042472
+              <i className="footer p-1 bi bi-telephone-fill"></i>+54 9 11 5004-3472
             </li>
 
             <li>
-              <i className="footer p-1 bi bi-envelope-fill"></i>jorge@gmail.com
+              <i className="footer p-1 bi bi-envelope-fill"></i>cigano@hotmail.com
             </li>
-            <li>
+            {/* <li>
               <i className="footer p-1 bi bi-geo-alt-fill"></i>Recoleta, Buenos
               Aires
-            </li>
+            </li> */}
           </ul>
         </div>
       </article>

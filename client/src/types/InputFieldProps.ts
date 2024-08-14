@@ -3,7 +3,7 @@ export interface InputFieldProps {
   type: string;
   name: string;
   id: string;
-  value: string | number;
+  value: string | number | undefined;
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

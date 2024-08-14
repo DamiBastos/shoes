@@ -24,9 +24,6 @@ module.exports = {
       postal_code: {
         type: Sequelize.INTEGER
       },
-      type_ship: {
-        type: Sequelize.STRING
-      },
       street: {
         type: Sequelize.STRING
       },
@@ -42,13 +39,13 @@ module.exports = {
       city: {
         type: Sequelize.STRING
       },
-      type_payment: {
+      state_payment: {
         type: Sequelize.STRING
       },
-      state_purchase: {
+      state_ship: {
         type: Sequelize.STRING
       },
-      ítems: {
+      items: {
         type: Sequelize.JSON
       },
       user_id: {

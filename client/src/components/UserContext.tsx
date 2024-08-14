@@ -62,8 +62,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    // Este efecto se ejecutará cada vez que `cart` cambie.
+  useEffect(() => {    
   }, [cart]);
 
   return (

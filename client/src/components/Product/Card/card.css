@@ -1,4 +1,17 @@
-body{
+.card{
+    height: 30rem;
+    width: 22rem;
+}
+
+.container-image{
+    height: 25%;
+}
+
+.img-center{
+    height: 10rem;
+}
+
+/* body{
     margin-top:20px;
 }
 
@@ -617,4 +630,4 @@ a>.block {
     font-weight: 600;
     color: #111;
     line-height: 1.46;
-}
+} */

@@ -7,7 +7,7 @@ import ButtonStyled from "../StyledButton";
 
 const RegisterForm: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     phone: "",
     password: "",
@@ -27,10 +27,10 @@ const RegisterForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { name, email, password, passwordConfirm } = formData;
+    const { username, email, password, passwordConfirm } = formData;
 
     // Validar campos vacíos
-    if (!name || !email || !password || !passwordConfirm) {
+    if (!username || !email || !password || !passwordConfirm) {
       setErrors("Por favor, complete todos los campos obligatorios.");
       return;
     }
@@ -65,13 +65,12 @@ const RegisterForm: React.FC = () => {
       onSubmit={handleSubmit}
       className="d-flex flex-column align-items-center justify-content-center"
     >
-      <ErrorMessage message={errors} />
       <InputField
-        label="Nombre"
+        label="Nombre de usuario"
         type="text"
-        name="name"
-        id="name"
-        value={formData.name}
+        name="username"
+        id="username"
+        value={formData.username}
         placeholder="Ej: Juan Perez"
         onChange={handleChange}
       />
@@ -112,7 +111,7 @@ const RegisterForm: React.FC = () => {
         onChange={handleChange}
       />
       <div className="w-50">
-        <div className="d-flex flex-column align-items-end w-100">
+        <div className="d-flex flex-column align-items-end w-100  gap-2">
           <ButtonStyled texto="CREAR CUENTA" />
           <div>
             <h6>¿Ya tenés cuenta?</h6>
@@ -120,6 +119,8 @@ const RegisterForm: React.FC = () => {
           </div>
         </div>
       </div>
+      <ErrorMessage message={errors} />
+
     </form>
   );
 };

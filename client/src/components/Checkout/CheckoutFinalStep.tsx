@@ -2,9 +2,6 @@ import React, { useState } from "react";
 
 import ErrorMessage from "../ErrorMessage";
 
-
-
-
 interface CheckoutFinalStepProps {
   prevStep: () => void;
   nextStep: () => void;
@@ -40,7 +37,7 @@ const CheckoutFinalStep: React.FC<CheckoutFinalStepProps> = ({
       <h6>MEDIO DE PAGO</h6>
 
       {/* Opción 1: Tarjeta de débito/crédito */}
-      <button
+      {/* <button
         className="btn d-flex justify-content-start align-items-center"
         type="button"
         data-bs-toggle="collapse"
@@ -56,7 +53,7 @@ const CheckoutFinalStep: React.FC<CheckoutFinalStepProps> = ({
         <div className="card card-body border d-flex justify-content-start align-items-start">
           <div>{"Detalle tarjeta débito/crédito"}</div>
         </div>
-      </div>
+      </div> */}
 
       {/* Opción 2: Transferencia Bancaria */}
       <button
@@ -72,13 +69,13 @@ const CheckoutFinalStep: React.FC<CheckoutFinalStepProps> = ({
         <p className="mb-0 ms-2">Transferencia Bancaria</p>
       </button>
       <div className="collapse" id="collapseTransferencia">
-        <div className="card card-body d-flex justify-content-start align-items-start">
-          <div>{"Detalles transferencia"}</div>
+        <div className="d-flex justify-content-start align-items-start">
+          <div>{"Terminada la compra se enviarán los datos para poder abonar su compra."}</div>
         </div>
       </div>
 
       {/* Opción 3: Efectivo */}
-      <button
+      {/* <button
         className="btn d-flex justify-content-start align-items-center"
         type="button"
         data-bs-toggle="collapse"
@@ -94,13 +91,13 @@ const CheckoutFinalStep: React.FC<CheckoutFinalStepProps> = ({
         <div className="card card-body d-flex justify-content-start align-items-start">
           <p>DIRECCIÓN LOCAL</p>
         </div>
-      </div>
+      </div> */}
       <ErrorMessage message={errors} />
 
 
       <div className="d-flex justify-content-start align-items-center"></div>
-      <button onClick={prevStep}>Anterior</button>
-      <button onClick={handleNextStep}>Confirmar</button>
+      <button className="m-1" onClick={prevStep}>Anterior</button>
+      <button className="m-1" onClick={handleNextStep}>Confirmar</button>
     </div>
   );
 };

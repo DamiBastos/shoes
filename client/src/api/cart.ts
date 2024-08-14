@@ -1,12 +1,13 @@
 import Swal from 'sweetalert2';
+import { link } from '.';
 
-export const addItemToCart = async (productId: number,userId: number | undefined) => {    
-  const response = await fetch('http://localhost:3000/cart/add', {
+export const addItemToCart = async (productId: number | undefined ,userId: number | undefined, size: number | undefined) => {    
+  const response = await fetch(`${link}/cart/add`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ productId,userId }),
+    body: JSON.stringify({ productId,userId, size }),
   });
 
   if (!response.ok) {
@@ -21,7 +22,7 @@ export const addItemToCart = async (productId: number,userId: number | undefined
 
 export const emptyCart = async (userId: number | undefined) => {
   try {
-    const response = await fetch('http://localhost:3000/cart/empty', {
+    const response = await fetch(`${link}/cart/empty`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -43,10 +44,7 @@ export const emptyCart = async (userId: number | undefined) => {
       confirmButtonText: 'Aceptar'
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.reload(); // Recarga la página
-        // O redirige a una ruta específica
-        // window.location.href = "/ruta-especifica";
-        // history.push("/ruta-especifica"); // Si estás utilizando React Router
+        window.location.reload();
       }
     });
 

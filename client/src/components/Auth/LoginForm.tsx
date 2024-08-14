@@ -73,15 +73,12 @@ const LoginForm: React.FC = () => {
         placeholder="Contraseña"
         onChange={handleChange}
       />
-      <div className="w-50">
-        <a href="" className="align-self-start">
-          ¿Olvidaste tu contraseña?
-        </a>
-        <div className="d-flex flex-column align-items-end w-100">
+      <div className="w-50 ">
+        <div className="d-flex flex-column align-items-end w-100 gap-2">
           <ButtonStyled texto="INICIAR SESIÓN" />
           <div>
             <h6>¿No tenés cuenta?</h6>
-            <a href="/cuenta/registro">Crear cuenta</a>
+            <a href="/register">Crear cuenta</a>
           </div>
         </div>
       </div>

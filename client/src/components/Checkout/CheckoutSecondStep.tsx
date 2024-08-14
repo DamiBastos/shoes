@@ -56,39 +56,18 @@ const CheckoutSecondStep: React.FC<CheckoutSecondStepProps> = ({
         <p className="mb-0 ms-2">Envío a domicilio</p>
       </button>
       <div className="collapse" id="collapseDomicilio">
-        <div className="card card-body border d-flex justify-content-start align-items-start">
-          <div>
-            <input
-              type="radio"
-              name="domicilio"
-              id="domicilio1"
-              onChange={() => handleSelectShippingOption("Correo Argentino Clásico")}
-            />
-            <label htmlFor="domicilio1">Correo Argentino Clásico</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              name="domicilio"
-              id="domicilio2"
-              onChange={() => handleSelectShippingOption("Correo Argentino Expreso")}
-            />
-            <label htmlFor="domicilio2">Correo Argentino Expreso</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              name="domicilio"
-              id="domicilio3"
-              onChange={() => handleSelectShippingOption("Andreani Estandar")}
-            />
-            <label htmlFor="domicilio3">Andreani Estandar</label>
+        <div className=" border d-flex justify-content-start align-items-start">
+          <div className="w-100">
+            <ul>
+            <li className="text-start">Los envíos en CABA y AMBA se confirman vía email.</li>
+            <li className="text-start">Envíos fuera del AMBA se realizan por correo argentino a cargo del comprador</li>
+            </ul>
           </div>
         </div>
       </div>
 
       {/* Opción 2: Retirar por punto de retiro */}
-      <button
+      {/* <button
         className="btn d-flex justify-content-start align-items-center"
         type="button"
         data-bs-toggle="collapse"
@@ -130,10 +109,10 @@ const CheckoutSecondStep: React.FC<CheckoutSecondStepProps> = ({
             <label htmlFor="punto3">Punto de entrega 3</label>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Opción 3: Retirar por local */}
-      <button
+      {/* <button
         className="btn d-flex justify-content-start align-items-center"
         type="button"
         data-bs-toggle="collapse"
@@ -149,12 +128,12 @@ const CheckoutSecondStep: React.FC<CheckoutSecondStepProps> = ({
         <div className="card card-body d-flex justify-content-start align-items-start">
           <p>DIRECCIÓN LOCAL</p>
         </div>
-      </div>
+      </div> */}
       <ErrorMessage message={errors} />
 
-      <div className="d-flex justify-content-start align-items-center"></div>
-      <button onClick={prevStep}>Anterior</button>
-      <button onClick={handleNextStep}>Siguiente</button>
+      <div className="d-flex justify-content-start align-items-center gap-2"></div>
+      <button className="m-1" onClick={prevStep}>Anterior</button>
+      <button className="m-1" onClick={handleNextStep}>Siguiente</button>
     </div>
   );
 };

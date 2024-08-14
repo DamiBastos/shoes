@@ -50,12 +50,14 @@ const CardList: React.FC = () => {
   }
 
   return (
-    <section className="w-100 d-flex flex-wrap align-items-center justify-content-center">
+    <section id="productos" className="w-100 d-flex flex-wrap align-items-center justify-content-center">
       {products.map((product) => (
         <ul className="d-flex align-items-center justify-content-center" key={product.id}>
           <Card
             id={product.id}
             nombre={product.model}
+            marca={product.brand}
+          talle={product?.Sizes[0] ? `${product?.Sizes[0]?.number} / ${product?.Sizes[product?.Sizes.length - 1]?.number}` : "Sin definir"}
             imagen={product.Colors[0]?.color_shoe.image}
             precio={product.price}
             descuento={product.discount}

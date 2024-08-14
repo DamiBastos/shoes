@@ -26,7 +26,7 @@ const EditSaleForm: React.FC<EditSaleFormProps> = ({
     
     try {
       const response = await fetch(
-        `http://localhost:3000/purchases/update/${sale.id}`,
+        `http://localhost:3000/purchase/update/${sale.id}`,
         {
           method: "PUT",
           headers: {
@@ -36,7 +36,7 @@ const EditSaleForm: React.FC<EditSaleFormProps> = ({
         }
       );
       if (response.ok) {
-        onClose(); // Close the modal after successful edit
+        onClose();
       } else {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -46,30 +46,22 @@ const EditSaleForm: React.FC<EditSaleFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form  onSubmit={handleSubmit}>
       <SelectField 
-        id="state_purchase"
-        name="state_purchase"
-        value={sale.state_purchase}
+        id="state_payment"
+        name="state_payment"
+        value={sale.state_payment}
         onChange={handleChange}
-        label="Estado de Envío"
-        options={['pendiente', 'completado', 'cancelado']}
+        label="Estado de pago"
+        options={[{label:"Inicial", value:"Inicial"},{label:"Pago", value:"Pago"},{label:"Cancelado", value:"Cancelado"}]}
       />
       <SelectField
-        id="type_ship"
-        name="type_ship"
-        value={sale.type_ship}
+        id="state_ship"
+        name="state_ship"
+        value={sale.state_ship}
         onChange={handleChange}
-        label="Tipo de Envío"
-        options={['Estandar', 'Exprés']}
-      />
-      <SelectField
-        id="type_payment"
-        name="type_payment"
-        value={sale.type_payment}
-        onChange={handleChange}
-        label="Tipo de Pago"
-        options={['tarjeta_credito', 'tarjeta_debito', 'paypal', 'transferencia_bancaria']}
+        label="Estado de envío"
+        options={[{label:"Local", value:"Local"},{label:"Enviado", value:"Enviado"},{label:"Recibido", value:"Recibido"},{label:"Cancelado", value:"Cancelado"}]}
       />
       <button type="submit">Guardar</button>
     </form>

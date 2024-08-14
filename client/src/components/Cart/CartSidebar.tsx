@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./CartSidebar.css";
 import { CartSidebarProps } from "../../types/CartSidebarProps";
 import { emptyCart } from "../../api/cart";
 import { useUser } from "../UserContext";
+import { formatNumber } from "../../utils/formateNumber";
 
 const CartSidebar: React.FC<CartSidebarProps> = ({
   show,
@@ -17,7 +18,6 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
     try {
       const empty = await emptyCart(user?.id);
       setCart([]);
-     
     } catch (error) {
       console.error("Error al vaciar el carrito:", error);
     }
@@ -37,6 +37,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
               <tr>
                 <th className="p-1">PRODUCTO</th>
                 <th className="p-1">Precio/Uni</th>
+                <th className="p-1">TALLE</th>
                 <th className="p-1">CANT</th>
                 <th className="p-1">PRECIO</th>
               </tr>
@@ -45,18 +46,14 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
               {products.items.map((product, index) => (
                 <tr key={index}>
                   <td className="d-flex p-1 align-items-center">
-                    {/* <img
-                      className="rounded"
-                      src={`/products/${product.image}`}
-                      alt={product.name}
-                      width={"100px"}
-                    ></img> */}
                     <span className="p-1">{product.name}</span>
                   </td>
-                  <td className="p-1">{product.unit_price}</td>
+                  <td className="p-1">{formatNumber(product.unit_price)}</td>
 
+                  <td className="p-1">{product.size.number}</td>
                   <td className="p-1">{product.quantity}</td>
-                  <td className="p-1">{product.price}</td>
+
+                  <td className="p-1">{formatNumber(product.price) }</td>
                 </tr>
               ))}
             </tbody>

@@ -1,8 +1,14 @@
 export interface SelectFieldProps {
-    label: string;
-    options: string[]; // Cambiado de [string] a string[] para representar un array de strings
-    name: string;
-    id: string;
-    value: string | number;
-    onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void; // Cambiado de HTMLInputElement a HTMLSelectElement
-  }
+  label: string;
+  name: string;
+  id: string;
+  value?: string | number; 
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  options: Option[];
+  multiple?: boolean;
+}
+
+interface Option {
+  label: string;
+  value: string | number;
+}
