@@ -19,7 +19,7 @@ var app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Origen permitido (puedes usar "*", pero es menos seguro)
+    origin: "http://149.50.130.212:5173", // Origen permitido (puedes usar "*", pero es menos seguro)
     methods: ["GET", "POST", "PUT", "DELETE"], // Métodos HTTP permitidos
     allowedHeaders: ["Content-Type", "Authorization"], // Cabeceras permitidas
     exposedHeaders: ['auth-token']
