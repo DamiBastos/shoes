@@ -48,7 +48,7 @@ const ProductDetail: React.FC = () => {
   const handleAddToCart = async () => {
     try {
       setClicked(true);
-      const response = await addItemToCart(product.id, user?.id, selectedSize);       
+      await addItemToCart(product.id, user?.id, selectedSize);
     } catch (error) {
       console.error("Error al agregar el producto al carrito:", error);
     }
@@ -72,13 +72,13 @@ const ProductDetail: React.FC = () => {
             ${formatNumber(product.price) }
           </p>
         </div>
-        <div className="productDetail fw-semibold">Color: 
+        <div className="productDetail fw-semibold">Color:
           {product.Colors.map((color: any, index: number)=>(
             <p key={index}>{color.name}</p>
           ))}
           </div>
         <p className="productDetail d-flex  gap-1">Talle:
-          {product.Sizes?.map((size:any,index)=>(
+          {product.Sizes?.map((size:any,index:number)=>(
             <button
             key={index}
             className={`d-flex border rounded p-1 ${selectedSize === size ? "selected bg-light text-black" : ""}`}

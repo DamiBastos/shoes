@@ -10,7 +10,7 @@ interface CheckoutDetailsProps {
 
 const CheckoutDetails: React.FC<CheckoutDetailsProps> = ({ formData, prevStep, handleSubmit }) => {
   const { cart } = useUser()
-  const [subtotal, setSubtotal] = useState(0);
+  const [, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {

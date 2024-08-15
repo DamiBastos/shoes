@@ -10,13 +10,13 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
   handleClose,
   products,
 }) => {
-  const [cart, setCart] = useState([]);
+  const [, setCart] = useState([]);
 
   const { user } = useUser();
 
   const handleVaciarCarrito = async () => {
     try {
-      const empty = await emptyCart(user?.id);
+      await emptyCart(user?.id);
       setCart([]);
     } catch (error) {
       console.error("Error al vaciar el carrito:", error);

@@ -12,7 +12,7 @@ const Card: React.FC<CardProps> = ({
   talle,
 }) => {
 
-  const [user, setUser] = useState<User | null>(null);
+  const [, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");

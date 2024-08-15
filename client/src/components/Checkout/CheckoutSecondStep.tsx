@@ -14,14 +14,13 @@ const CheckoutSecondStep: React.FC<CheckoutSecondStepProps> = ({
   updateFormData,
 }) => {
   const [typeShip, setTypeShip] = useState<string>("");
-  const [shippingOption, setShippingOption] = useState<string>("");
+  // const [shippingOption, setShippingOption] = useState<string>("");
   const [errors, setErrors] = useState<string | null>(null);
 
 
   const handleNextStep = () => {
-   
     // Actualizar los datos en formData
-    updateFormData({ typeShip, shippingOption });
+    updateFormData({ typeShip });
     if (!typeShip) {
       setErrors("Por favor, complete todos los campos obligatorios.");
       return;
@@ -34,9 +33,9 @@ const CheckoutSecondStep: React.FC<CheckoutSecondStepProps> = ({
     setTypeShip(type);
   };
 
-  const handleSelectShippingOption = (option: string) => {
-    setShippingOption(option);
-  };
+  // const handleSelectShippingOption = (option: string) => {
+  //   setShippingOption(option);
+  // };
 
   return (
     <div className="">

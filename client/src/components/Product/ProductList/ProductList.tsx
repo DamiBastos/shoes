@@ -3,7 +3,6 @@ import { Product } from "../../../types";
 import EditProductModal from "../ProductForms/EditProductModal";
 import CreateProductModal from "../ProductForms/CreateProductModal"; // Import the CreateProductModal
 import { listShoes, productDelete } from "../../../api/shoes";
-import { Color } from "../../../types";
 import { formatNumber } from "../../../utils/formateNumber";
 
 const ProductList: React.FC = () => {
