@@ -48,9 +48,7 @@ const ProductDetail: React.FC = () => {
   const handleAddToCart = async () => {
     try {
       setClicked(true);
-      const response = await addItemToCart(product.id, user?.id, selectedSize); 
-      console.log("product:",product);
-      
+      const response = await addItemToCart(product.id, user?.id, selectedSize);       
     } catch (error) {
       console.error("Error al agregar el producto al carrito:", error);
     }

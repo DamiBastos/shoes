@@ -40,17 +40,17 @@ const Footer: React.FC = () => {
           <h6>NAVEGACIÓN</h6>
           <ul className="p-0 d-flex flex-column align-items-start">
             <li>
-              <a href="">Inicio</a>
+              <a href="#producto">Inicio</a>
             </li>
             <li>
-              <a href="">Productos</a>
+              <a href="#producto">Productos</a>
             </li>
             
             <li>
-              <a href="">Contacto</a>
+              <a href="#producto">Contacto</a>
             </li>
             <li>
-              <a href="">Tiempos de entrega</a>
+              <a href="#producto">Tiempos de entrega</a>
             </li>
           </ul>
         </div>
@@ -64,10 +64,6 @@ const Footer: React.FC = () => {
             <li>
               <i className="footer p-1 bi bi-envelope-fill"></i>cigano@hotmail.com
             </li>
-            {/* <li>
-              <i className="footer p-1 bi bi-geo-alt-fill"></i>Recoleta, Buenos
-              Aires
-            </li> */}
           </ul>
         </div>
       </article>

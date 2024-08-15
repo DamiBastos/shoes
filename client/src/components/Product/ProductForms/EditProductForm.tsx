@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Product } from "../../../types";
 import InputField from "../../InputField";
 import TextAreaField from "../../TextAreaField";
+import { link } from "../../../api";
 
 interface EditProductFormProps {
   initialProduct: Product;
@@ -26,7 +27,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/shoe/update/${product.id}`,
+        `${link}/shoe/update/${product.id}`,
         {
           method: "PUT",
           headers: {

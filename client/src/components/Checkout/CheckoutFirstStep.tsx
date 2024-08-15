@@ -16,16 +16,11 @@ const CheckoutFirstStep: React.FC<CheckoutFirstStepProps> = ({ nextStep, updateF
 
 
   const handleNextStep = () => {
-    // Actualizar los datos en formData
     updateFormData({ email, postal_code });
-
-     // Validar campos vacíos
      if (!email || !postal_code) {
       setErrors("Por favor, complete todos los campos obligatorios.");
       return;
     }
-
-    // Ir al siguiente paso
     nextStep();
   };
 

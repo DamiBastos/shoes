@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Shop } from "../../../types/Shop";
 import SelectField from "../../SelectField";
+import { link } from "../../../api";
 
 interface EditSaleFormProps {
   initialProduct: Shop;
@@ -26,7 +27,7 @@ const EditSaleForm: React.FC<EditSaleFormProps> = ({
     
     try {
       const response = await fetch(
-        `http://localhost:3000/purchase/update/${sale.id}`,
+        `${link}/purchase/update/${sale.id}`,
         {
           method: "PUT",
           headers: {

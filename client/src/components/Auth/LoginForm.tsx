@@ -27,15 +27,10 @@ const LoginForm: React.FC = () => {
     try {
       const data = await loginUser(formData.email, formData.password);
 
-      // Supongamos que el servidor responde con el usuario y un token
-      console.log("Login successful", data.body);
-
       // Guardar el usuario (o token) en el almacenamiento local o en el estado de la aplicación
       localStorage.setItem("user", JSON.stringify(data));
-
       // Reset error
       setError(null);
-
       // Redirigir a la página de inicio o alguna otra página
       window.location.href = "/"; // O usa history.push('/') si estás usando react-router-dom
     } catch (error) {

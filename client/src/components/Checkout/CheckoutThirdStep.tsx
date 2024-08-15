@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import InputField from "../InputField";
-
 import ErrorMessage from "../ErrorMessage";
-
-
-
 
 interface CheckoutThirdStepProps {
   prevStep: () => void;

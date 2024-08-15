@@ -35,27 +35,6 @@ const CheckoutFinalStep: React.FC<CheckoutFinalStepProps> = ({
   return (
     <div className="">
       <h6>MEDIO DE PAGO</h6>
-
-      {/* Opción 1: Tarjeta de débito/crédito */}
-      {/* <button
-        className="btn d-flex justify-content-start align-items-center"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseTarjeta"
-        aria-expanded="false"
-        aria-controls="collapseTarjeta"
-        onClick={() => handleSelectTipoPago("Tarjeta de débito/crédito")}
-      >
-        <i className="bi bi-credit-card-2-back text-black"></i>
-        <p className="mb-0 ms-2">Tarjeta de débito y crédito</p>
-      </button>
-      <div className="collapse" id="collapseTarjeta">
-        <div className="card card-body border d-flex justify-content-start align-items-start">
-          <div>{"Detalle tarjeta débito/crédito"}</div>
-        </div>
-      </div> */}
-
-      {/* Opción 2: Transferencia Bancaria */}
       <button
         className="btn d-flex justify-content-start align-items-center"
         type="button"
@@ -73,25 +52,6 @@ const CheckoutFinalStep: React.FC<CheckoutFinalStepProps> = ({
           <div>{"Terminada la compra se enviarán los datos para poder abonar su compra."}</div>
         </div>
       </div>
-
-      {/* Opción 3: Efectivo */}
-      {/* <button
-        className="btn d-flex justify-content-start align-items-center"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseLocal"
-        aria-expanded="false"
-        aria-controls="collapseLocal"
-        onClick={() => handleSelectTipoPago("Efectivo")}
-      >
-        <i className="bi bi-cash-coin text-black"></i>
-        <p className="mb-0 ms-2">Efectivo</p>
-      </button>
-      <div className="collapse" id="collapseLocal">
-        <div className="card card-body d-flex justify-content-start align-items-start">
-          <p>DIRECCIÓN LOCAL</p>
-        </div>
-      </div> */}
       <ErrorMessage message={errors} />
 
 

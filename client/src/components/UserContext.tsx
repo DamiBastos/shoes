@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import axios from "axios";
 import { User, UserContextType } from "../types";
+import { link } from "../api";
 
 interface UserProviderProps {
   children: ReactNode;
@@ -42,7 +43,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const fetchCart = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/cart/${user?.id}`
+        `${link}/cart/${user?.id}`
       );
       setCart(response.data.body.cart);
 
@@ -54,7 +55,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const fetchShopList = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/purchase/user/${user?.id}`
+        `${link}/purchase/user/${user?.id}`
       );
       setShopList(response.data.body);
     } catch (error) {
