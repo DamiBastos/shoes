@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    port:80,
     host: '0.0.0.0', // Configura Vite para escuchar en todas las interfaces de red
   },
 })

@@ -19,7 +19,13 @@ var app = express();
 
 app.use(
   cors({
-    origin: "http://149.50.130.212:5173", // Origen permitido (puedes usar "*", pero es menos seguro)
+    origin:[
+	"http://149.50.130.212",
+	"http://149.50.130.212:80", 
+	"http://149.50.130.212:81",
+	"http://www.shoesmarket.com.ar",
+	"http://shoesmarket.com.ar"
+	], // Origen permitido (puedes usar "*", pero es menos seguro)
     methods: ["GET", "POST", "PUT", "DELETE"], // Métodos HTTP permitidos
     allowedHeaders: ["Content-Type", "Authorization"], // Cabeceras permitidas
     exposedHeaders: ['auth-token']
