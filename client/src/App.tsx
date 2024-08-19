@@ -18,7 +18,6 @@ function App() {
   const { user } = useUser();
 
   useEffect(() => {
-    console.log("Usuario en App:", user);
   }, [user]);
 
   return (
