@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import CardFooter from "./CardFooter";
 import "./Footer.css";
 
 const Footer: React.FC = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleVisibility = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <footer className="bodyfooter d-flex flex-column align-items-center">
       <article className="p-5 w-100 d-flex flex-column align-items-center">
@@ -23,11 +30,6 @@ const Footer: React.FC = () => {
             principal="Enviamos tu compra"
             secondary="Entregas a todo el país"
           />
-          {/* <CardFooter
-            icon="p-1 bi bi-credit-card"
-            principal="Pagá como quieras"
-            secondary="Transferencia o efectivo"
-          /> */}
           <CardFooter
             icon="p-1 bi bi-lock"
             principal="Comprá con seguridad"
@@ -36,7 +38,7 @@ const Footer: React.FC = () => {
         </section>
       </article>
       <article className="p-5 gap-5 w-100 d-flex justify-content-start">
-        <div>
+        <div className="w-25 d-flex flex-column align-items-start">
           <h6>NAVEGACIÓN</h6>
           <ul className="p-0 d-flex flex-column align-items-start">
             <li>
@@ -44,14 +46,15 @@ const Footer: React.FC = () => {
             </li>
             <li>
               <a href="#producto">Productos</a>
+              
+            </li>
+            <li className="d-flex flex-column align-items-start">
+            <a href="#producto" onClick={toggleVisibility} className="text-decoration-none">Tiempos de entrega</a>
+            <div className={`collapse ${isOpen ? 'show' : ''}`}>
+        <p className="text-start border p-1 m-1">Desde el momento de recibido el pago, la entrega es con un maximo de 5 dias hábiles dentro de caba o provincia de buenos aires. Por compras desde el interior es a confirmar.</p>
+      </div>
             </li>
             
-            <li>
-              <a href="#producto">Contacto</a>
-            </li>
-            <li>
-              <a href="#producto">Tiempos de entrega</a>
-            </li>
           </ul>
         </div>
         <div className="">

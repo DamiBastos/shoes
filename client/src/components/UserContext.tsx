@@ -15,6 +15,14 @@ interface UserProviderProps {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useUser must be used within a UserProvider");
+  }
+  return context;
+};
+
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [cart, setCart] = useState<any>(null); // Especifica el tipo si es posible
@@ -23,20 +31,18 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem("user");    
     if (storedUser) {
-      const parsedUser: User = JSON.parse(storedUser).user;
+      const parsedUser: User = JSON.parse(storedUser).user;      
       setUser(parsedUser);
     }
   }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      
       if (user && !user.isAdmin) {
         await fetchCart();
         await fetchShopList();
       }
     };
-
     fetchUserData();
   }, [user]);
 
@@ -65,18 +71,13 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
   useEffect(() => {    
   }, [cart]);
+  
 
   return (
     <UserContext.Provider value={{ user, cart, shopList, fetchCart, fetchShopList }}>
       {children}
     </UserContext.Provider>
   );
-};
+};  
 
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error("useUser must be used within a UserProvider");
-  }
-  return context;
-};
+

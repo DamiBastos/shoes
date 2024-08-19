@@ -24,7 +24,9 @@ app.use(
 	"http://149.50.130.212:80", 
 	"http://149.50.130.212:81",
 	"http://www.shoesmarket.com.ar",
-	"http://shoesmarket.com.ar"
+	"http://shoesmarket.com.ar",
+  "http://localhost",
+  "http://localhost:80"
 	], // Origen permitido (puedes usar "*", pero es menos seguro)
     methods: ["GET", "POST", "PUT", "DELETE"], // Métodos HTTP permitidos
     allowedHeaders: ["Content-Type", "Authorization"], // Cabeceras permitidas
