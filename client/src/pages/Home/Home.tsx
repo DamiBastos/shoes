@@ -1,5 +1,6 @@
 import React from "react";
 import CardList from "../../components/Product/ProductList/CardList";
+import "./home.css";
 
 const Home: React.FC = () => {
   return (
@@ -53,12 +54,13 @@ const Home: React.FC = () => {
           </button>
         </div>
       </article>
-      <article>
-        <a className="" href="">
-          <i className="p-3 whatsapp bi bi-whatsapp"></i>
-        </a>
-      </article>
+      <article className="conteiner-marquee">
+        <div className="marquee">
+        <h6>CONSULTAR STOCK ANTES DE CONFIRMAR LA COMPRA</h6>
+        </div>
+        </article>
       <article className="d-flex flex-column align-items-center">
+        
         <h4>CATEGORÍAS PRINCIPALES</h4>
         <section className="d-flex gap-1">
           <a href="#productos">Hombres</a>

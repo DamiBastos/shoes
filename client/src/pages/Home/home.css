@@ -1,0 +1,36 @@
+.conteiner-marquee {
+    position: relative;
+    width: 100%;
+    height: 100px; /* Ajusta según el tamaño del texto */
+    overflow: hidden; 
+}
+
+/* Contenedor de la animación */
+.marquee {
+    position: relative; /* Cambia a relative si no necesitas que esté fijo o absoluto */
+    width: 100%;
+    height: 80px; /* Ajusta según el tamaño del texto */
+    line-height: 100px; /* Alinea el texto verticalmente */
+    overflow: hidden; /* Esconde el texto que se mueve fuera del contenedor */
+    z-index: 1; /* Asegúrate de que esté por debajo de otros elementos si es necesario */
+}
+
+/* Estilo del texto animado */
+.marquee h6 {
+    display: inline-block;
+    animation: marquee 16s linear infinite; /* Nombre de la animación, duración, tipo de animación, y repetición infinita */
+    font-size: 14px;
+}
+
+/* Definición de la animación */
+@keyframes marquee {
+    0% {
+        transform: translateX(100%); /* Empieza desde la derecha fuera del contenedor */
+    }
+    50% {
+        transform: translateX(-100%); /* Mueve hasta la izquierda fuera del contenedor */
+    }
+    100% {
+        transform: translateX(100%); /* Vuelve a la derecha fuera del contenedor */
+    }
+}
