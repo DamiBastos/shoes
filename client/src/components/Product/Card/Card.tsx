@@ -25,6 +25,9 @@ const Card: React.FC<CardProps> = ({
   return (
     <div className="card">
       <a href={`/product/${id}`}>
+      <h5 className="heading heading-5 strong-600 text-capitalize">
+            {nombre}
+          </h5>
         <div className="container-img">
           <img
             src={`${imagen}`}
@@ -33,9 +36,6 @@ const Card: React.FC<CardProps> = ({
           />
         </div>
         <div className="text-center">
-          <h5 className="heading heading-5 strong-600 text-capitalize">
-            {nombre}
-          </h5>
           <h6 className="">{marca}</h6>
           <p className="product-description"><strong>Talles:</strong> {talle} </p>
           <p className="product-description"><strong>Precio:</strong> ${formatNumber(precio)} </p>

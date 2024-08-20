@@ -49,7 +49,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
   return (
     <form onSubmit={handleSubmit}>
       <InputField
-        label="Model"
+        label="Modelo"
         type="text"
         name="model"
         id="model"
@@ -57,7 +57,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
         onChange={handleChange}
       />
       <InputField
-        label="Brand"
+        label="Marca"
         type="text"
         name="brand"
         id="brand"
@@ -65,7 +65,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
         onChange={handleChange}
       />
       <InputField
-        label="Genre"
+        label="Genero"
         type="text"
         name="genre"
         id="genre"
@@ -73,7 +73,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
         onChange={handleChange}
       />
       <TextAreaField
-        label="Description"
+        label="Descripción"
         name="description"
         id="description"
         value={product.description}
@@ -88,7 +88,7 @@ const EditProductForm: React.FC<EditProductFormProps> = ({
         onChange={handleChange}
       />
       <InputField
-        label="Price"
+        label="Precio"
         type="number"
         name="price"
         id="price"

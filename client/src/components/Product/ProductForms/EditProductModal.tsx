@@ -15,9 +15,9 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
   product,
 }) => {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} size="sm">
       <Modal.Header closeButton>
-        <Modal.Title>Edit Product</Modal.Title>
+        <Modal.Title>Editar Producto</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <EditProduct product={product} onClose={handleClose} />

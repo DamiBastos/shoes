@@ -127,7 +127,7 @@ const CreateProductForm: React.FC<CreateProductFormProps> = ({ onClose }) => {
         onChange={handleChange}
       />
       <InputField
-        label="Imagen"
+        label="Imágen"
         type="text"
         name="image"
         id="image"

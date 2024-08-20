@@ -67,10 +67,10 @@ const Home: React.FC = () => {
         </section>
       </article>
       <article className="w-100 d-flex flex-column align-items-center justify-content-center">
-        <h3>DESTACADOS</h3>
+        <h3>PRODUCTOS</h3>
         <section className="w-100 d-flex flex-wrap align-items-center justify-content-center">
           <CardList />
-          <a href="">VER TODOS LOS PRODUCTOS</a>
+          {/* <a href="">VER TODOS LOS PRODUCTOS</a> */}
         </section>
       </article>
     </main>

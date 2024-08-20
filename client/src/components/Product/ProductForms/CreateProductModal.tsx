@@ -12,7 +12,7 @@ const CreateProductModal: React.FC<CreateProductModalProps> = ({
   handleClose,
 }) => {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} size="sm">
       <Modal.Header closeButton>
         <Modal.Title>Crear producto</Modal.Title>
       </Modal.Header>
