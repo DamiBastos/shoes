@@ -56,7 +56,7 @@ const ProductList: React.FC = () => {
               <thead>
                 <tr className="">
                   <th className="p-1">MODELO</th>
-                  <th className="p-1">MARCA</th>
+                  {/* <th className="p-1">MARCA</th> */}
                   <th className="p-1">IMAGEN</th>
                   <th className="p-1">PROVEEDOR</th>
                   <th className="p-1">PRECIO</th>
@@ -67,7 +67,7 @@ const ProductList: React.FC = () => {
                 {shoes?.map((shoe: any, index: number) => (
                   <tr className="" key={index}>
                     <td className="p-1">{shoe.model}</td>
-                    <td className="p-1">{shoe.brand}</td>
+                    {/* <td className="p-1">{shoe.brand}</td> */}
                     {/* <td className="d-flex justify-content-center align-items-center">
                       {shoe.Colors
                         ? shoe.Colors.map((color: Color, index: number) => (
