@@ -77,7 +77,8 @@ const ProductDetail: React.FC = () => {
             <p key={index}>{color.name}</p>
           ))}
           </div>
-        <p className="productDetail d-flex  gap-1">Talle:
+          <div>Talle:</div>
+        <p className="productDetail d-flex  gap-1 flex-wrap">
           {product.Sizes?.map((size:any,index:number)=>(
             <button
             key={index}
@@ -88,7 +89,7 @@ const ProductDetail: React.FC = () => {
           </button>
           ))}
           </p>
-        <p>Genero: {product.genre}</p>
+        <p>Género: {product.genre}</p>
         <p>Stock: {product.stock}</p>
         <button className={`w-100 ${clicked ? "bg-secondary" : "bg-black"}`}
       onClick={handleAddToCart}

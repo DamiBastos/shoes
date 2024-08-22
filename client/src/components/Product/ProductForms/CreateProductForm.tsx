@@ -5,6 +5,9 @@ import SelectField from "../../SelectField";
 import { listColors } from "../../../api/color";
 import { Color, Product } from "../../../types";
 import ErrorMessage from "../../ErrorMessage";
+import { listSizes } from "../../../api/size";
+import { Size } from "../../../types/Size";
+import CheckBoxFields from "../../CheckBoxFields";
 
 
 interface CreateProductFormProps {
@@ -22,10 +25,12 @@ const CreateProductForm: React.FC<CreateProductFormProps> = ({ onClose }) => {
     discount: 0,
     provider: "",
     Colors: [],
+    Sizes:[],
     image: "",
   });
 
   const [colors, setColors] = useState<Color[]>([]);
+  const [sizes, setSizes] = useState<Size[]>([]);
   const [errors, setErrors] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,8 +60,16 @@ const CreateProductForm: React.FC<CreateProductFormProps> = ({ onClose }) => {
         console.error("Error al cargar los colores:", error);
       }
     };
-
+    const fetchSizes = async () => {
+      try {
+        const talles = await listSizes();
+        setSizes(talles);
+      } catch (error) {
+        console.error("Error al cargar los talles:", error);
+      }
+    };
     fetchColors();
+    fetchSizes();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,7 +77,7 @@ const CreateProductForm: React.FC<CreateProductFormProps> = ({ onClose }) => {
     try {
 
        // Validar campos vacíos
-    if (!formData.model || !formData.brand || !formData.genre || !formData.stock ||!formData.price || !formData.provider ||!formData.Colors || !formData.image) {
+    if (!formData.model || !formData.brand || !formData.genre || !formData.stock ||!formData.price || !formData.provider ||!formData.Colors || !formData.image || formData.Sizes.length < 1) {
       setErrors("Por favor, complete todos los campos obligatorios.");
       return;
     }
@@ -74,6 +87,23 @@ const CreateProductForm: React.FC<CreateProductFormProps> = ({ onClose }) => {
     } catch (error) {
       setErrors("Hubo un error al crear el producto");
     }
+  };
+
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const optionValue = event.target.value;
+    const isChecked = event.target.checked;
+
+    const newValue = isChecked
+      ? [...selectedOptions, optionValue]
+      : selectedOptions.filter((val) => val !== optionValue);
+
+    setSelectedOptions(newValue);
+    setFormData({
+      ...formData,
+      Sizes: selectedOptions,
+    });
   };
 
   return (
@@ -107,6 +137,17 @@ const CreateProductForm: React.FC<CreateProductFormProps> = ({ onClose }) => {
           label: color.name, 
           value: color.id.toString(), 
         }))}
+      />
+      <CheckBoxFields
+        id="Sizes"
+        label="Talles:"
+        options={sizes.map((size) => ({
+          label: String(size.number), 
+          value: size.id.toString(), 
+        }))}
+        name="Sizes"
+        value={selectedOptions}
+        onChange={handleCheckboxChange}
       />
       <InputField
         label="Género"
