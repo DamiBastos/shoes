@@ -25,7 +25,7 @@ async function sendMail(client, email, products) {
   try {
     const info = await transporter.sendMail({
       from: '"Market Shoe 👟" <damian.bastos@yahoo.com>', // Dirección del remitente
-      to: [email, "damian.bastos@yahoo.com"], // Dirección del receptor
+      to: [email, "damian.bastos@yahoo.com", "cigano32@hotmail.com"], // Dirección del receptor
       subject: "Info de tu compra!", // Asunto del correo
       text: `Buenos días, ${client}`, // Cuerpo del texto plano
       html: `

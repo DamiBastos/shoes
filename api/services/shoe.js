@@ -32,20 +32,20 @@ exports.postShoe = async (shoe) => {
       await size_shoe.bulkCreate(sizeAssociations, { transaction });
     }
 
-      // Manejo de asociaciones de tallas
-      const defaultSizeIds = Array.from({ length: 10 }, (_, i) => i + 6); // IDs del 5 al 14
-      const sizeAssociations = (Sizes || []).map((sizeId) => ({
-        shoe_id: newShoe.id,
-        size_id: sizeId,
-      }));
-      // Añadir asociaciones para las tallas del 5 al 14
-      const defaultSizeAssociations = defaultSizeIds.map((sizeId) => ({
-        shoe_id: newShoe.id,
-        size_id: sizeId,
-      }));
+      // // Manejo de asociaciones de tallas
+      // const defaultSizeIds = Array.from({ length: 10 }, (_, i) => i + 6); // IDs del 5 al 14
+      // const sizeAssociations = (Sizes || []).map((sizeId) => ({
+      //   shoe_id: newShoe.id,
+      //   size_id: sizeId,
+      // }));
+      // // Añadir asociaciones para las tallas del 5 al 14
+      // const defaultSizeAssociations = defaultSizeIds.map((sizeId) => ({
+      //   shoe_id: newShoe.id,
+      //   size_id: sizeId,
+      // }));
       // Combina las asociaciones personalizadas con las predeterminadas
-      const allSizeAssociations = [...sizeAssociations, ...defaultSizeAssociations];
-      await size_shoe.bulkCreate(allSizeAssociations, { transaction });
+      // const allSizeAssociations = [...sizeAssociations, ...defaultSizeAssociations];
+      // await size_shoe.bulkCreate(sizeAssociations, { transaction });
 
     // // Confirmar la transacción
     await transaction.commit();

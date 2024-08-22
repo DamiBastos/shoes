@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const { ErrorObject } = require('../helpers/error')
 const db = require("../models/index");
 
@@ -14,7 +15,11 @@ exports.postSize = async (color) => {
 
 exports.getSizes = async () =>{
     try {
-      const sizes = await Size.findAll()
+      const sizes = await Size.findAll({
+        order: [
+          ['number', 'ASC'],
+      ],
+      })
       return sizes
     } catch (error) {
       throw new ErrorObject(error.message, error.statusCode || 500)
