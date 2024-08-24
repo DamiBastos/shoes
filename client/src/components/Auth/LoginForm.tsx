@@ -68,7 +68,7 @@ const LoginForm: React.FC = () => {
         onChange={handleChange}
       />
       <div className="w-50 ">
-        <div className="d-flex flex-column align-items-end w-100 gap-2">
+        <div className="d-flex flex-column align-items-center w-100 gap-2">
           <ButtonStyled texto="INICIAR SESIÓN" />
           <div>
             <h6>¿No tenés cuenta?</h6>

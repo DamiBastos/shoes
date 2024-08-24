@@ -111,7 +111,7 @@ const RegisterForm: React.FC = () => {
         onChange={handleChange}
       />
       <div className="w-50">
-        <div className="d-flex flex-column align-items-end w-100  gap-2">
+        <div className="d-flex flex-column align-items-center w-100  gap-2">
           <ButtonStyled texto="CREAR CUENTA" />
           <div>
             <h6>¿Ya tenés cuenta?</h6>

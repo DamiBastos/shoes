@@ -53,7 +53,7 @@ const Header: React.FC = () => {
               </button>
             </div>
           ) : (
-            <div className="d-flex gap-1">
+            <div className="d-flex gap-3">
               <a href="/register">Crear cuenta</a>
               <a href="/login">Iniciar sesión</a>
             </div>
