@@ -17,8 +17,6 @@ interface RouteParams {
 const ProductDetail: React.FC = () => {
   const { id } = useParams<RouteParams>();
   const [product, setProduct] = useState<Product | null>(null);
-  // const [clicked, setClicked] = useState(false);
-  // const [selectedSize, setSelectedSize] = useState(35);
   const [selectedSize, setSelectedSize] = useState<number | null>(null); // Cambia el valor inicial a null
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useFilter } from "../../components/FilterContext";
-import { useUser } from "../../components/UserContext";
+// import { useUser } from "../../components/UserContext";
 import { Product } from "../../types";
 import { listShoes } from "../../api/shoes"; // Asegúrate de tener esta función
 import CardList from "../../components/Product/ProductList/CardList";

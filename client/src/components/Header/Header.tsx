@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useUser } from "../UserContext"; // Importa el hook useUser
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
 
 
   return (
-    <header className="w-100">
+    <header id="inicio" className="w-100">
       <article className="px-5 d-flex justify-content-between shadow-sm bg-body-tertiary rounded align-items-center">
         <section className="header__nav d-flex gap-2">
           <a href="https://wa.me/5491150043472" target="_blank" className="text-black">

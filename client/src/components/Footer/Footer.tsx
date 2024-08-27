@@ -10,6 +10,13 @@ const Footer: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="bodyfooter d-flex flex-column align-items-center">
       <article className="p-5 w-100 d-flex flex-column align-items-center">
@@ -42,11 +49,25 @@ const Footer: React.FC = () => {
           <h6>NAVEGACIÓN</h6>
           <ul className="p-0 d-flex flex-column align-items-start">
             <li>
-              <a href="#producto">Inicio</a>
-            </li>
+            <a
+                href="#inicio"
+                onClick={(e) => {
+                  e.preventDefault(); 
+                  scrollToSection('inicio');
+                }}
+              >
+                Inicio
+              </a>            </li>
             <li>
-              <a href="#producto">Productos</a>
-              
+            <a
+                href="#productos"
+                onClick={(e) => {
+                  e.preventDefault(); 
+                  scrollToSection('productos');
+                }}
+              >
+                Productos
+              </a>              
             </li>
             <li className="d-flex flex-column align-items-start">
             <a href="#producto" onClick={toggleVisibility} className="text-decoration-none">Tiempos de entrega</a>
