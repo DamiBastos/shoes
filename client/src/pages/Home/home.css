@@ -1,3 +1,13 @@
+.home__nav a {
+    color: black; /* Color por defecto */
+    text-decoration: none;
+  }
+  
+  .home__nav a.active-filter {
+    color: blue; /* Color del filtro activo */
+    text-decoration: underline;
+  }
+
 .conteiner-marquee {
     position: relative;
     width: 100%;

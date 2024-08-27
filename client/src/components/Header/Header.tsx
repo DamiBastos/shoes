@@ -4,10 +4,25 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useUser } from "../UserContext"; // Importa el hook useUser
 import CartSidebar from "../Cart/CartSidebar";
 import { formatNumber } from "../../utils/formateNumber";
+import { useFilter } from "../FilterContext";
+import { useNavigate } from "react-router-dom";
 
 const Header: React.FC = () => {
-  const { user, fetchCart, cart } = useUser();
-  const [showCart, setShowCart] = useState(false);
+  const { user, fetchCart, cart, isCartOpen, openCart, closeCart } = useUser();
+  const { setFilter } = useFilter();
+
+  const navigate = useNavigate();
+
+  const handleFilterAndScroll = (filterValue: string, sectionId: string) => {
+    setFilter(filterValue);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    navigate('/');
+  };
+
+ 
 
   useEffect(() => {
     if (user && !user.isAdmin) {
@@ -24,8 +39,12 @@ const Header: React.FC = () => {
     window.location.href = "/";
   };
 
-  const handleOpenCart = () => setShowCart(true);
-  const handleCloseCart = () => setShowCart(false);
+  const handleCartClick = async () => {
+    await fetchCart(); // Actualiza el carrito antes de abrirlo
+    openCart(); // Abre el carrito
+  };
+
+
 
   return (
     <header className="w-100">
@@ -63,15 +82,14 @@ const Header: React.FC = () => {
       <article className="w-100 px-3 d-flex justify-content-between align-items-center shadow-sm bg-body-tertiary">
         <section className="px-1">
           <a className="logo p-1" href="/">
-            SHOES-MARKET
+            SHOESMARKET
           </a>
         </section>
         <nav className="header__nav d-flex gap-2">
-          <a href="#productos">Inicio</a>
-          <a href="#productos">Productos</a>
-          <a href="#productos">Kids</a>
-          <a href="#productos">Hombre</a>
-          <a href="#productos">Mujer</a>
+        <a href="#productos" onClick={() => handleFilterAndScroll('productos', 'productos')}>Productos</a>
+        <a href="#productos" onClick={() => handleFilterAndScroll('hombre', 'productos')}>Hombre</a>
+        <a href="#productos" onClick={() => handleFilterAndScroll('mujer', 'productos')}>Mujer</a>
+        <a href="#productos" onClick={() => handleFilterAndScroll('niño', 'productos')}>Niño</a>
         </nav>
         <section className="d-flex justify-content-between align-items-center">
           {/* <div className="header__search d-flex mx-5 px-2 border rounded-pill">
@@ -93,7 +111,7 @@ const Header: React.FC = () => {
               ) : null}
               <i
                 className="bi bi-cart3"
-                onClick={handleOpenCart}
+                onClick={handleCartClick}
                 style={{ cursor: "pointer" }}
               ></i>
               <h6 className="">{ `${cart?.total ? `$${formatNumber(cart.total)}`: ""} `}</h6>
@@ -103,7 +121,7 @@ const Header: React.FC = () => {
           )}
         </section>
       </article>
-      <CartSidebar show={showCart} handleClose={handleCloseCart} products={cart} />
+      <CartSidebar show={isCartOpen} handleClose={closeCart} products={cart} />
     </header>
   );
 };

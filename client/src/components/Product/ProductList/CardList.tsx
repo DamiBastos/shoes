@@ -1,39 +1,16 @@
-import React, { useState, useEffect } from "react";
+// CardList.tsx
+import React, { useState } from "react";
 import Card from "../Card/Card";
 import { Product } from "../../../types";
 import EditProductModal from "../ProductForms/EditProductModal";
-import { listShoes } from "../../../api/shoes";
 
-const CardList: React.FC = () => {
-  const [products, setProducts] = useState<Product[] | null>(null);
+interface CardListProps {
+  products: Product[];
+}
+
+const CardList: React.FC<CardListProps> = ({ products }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
- 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const shoesData = await listShoes();
-        if (Array.isArray(shoesData)) {
-          setProducts(shoesData);
-        } else {
-          throw new Error("La respuesta de los datos no es un array");
-        }
-      } catch (error: any) {
-        setError(error.message);
-        console.error("Error al cargar productos:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) return <div>Cargando productos...</div>;
-  if (error) return <div>Error: {error}</div>;
 
   const handleEdit = (product: Product) => {
     setSelectedProduct(product);
@@ -45,19 +22,15 @@ const CardList: React.FC = () => {
     setSelectedProduct(null);
   };
 
-  if (!products) {
-    return <h1>Cargando...</h1>;
-  }
-
   return (
-    <section id="productos" className="w-100 d-flex flex-wrap align-items-center justify-content-center">
+    <section  className="w-100 d-flex flex-wrap align-items-center justify-content-center">
       {products.map((product) => (
         <ul className="d-flex align-items-center justify-content-center" key={product.id}>
           <Card
             id={product.id}
             nombre={product.model}
             marca={product.brand}
-          talle={product?.Sizes[0] ? `${product?.Sizes[0]?.number} / ${product?.Sizes[product?.Sizes.length - 1]?.number}` : "Sin definir"}
+            talle={product?.Sizes[0] ? `${product?.Sizes[0]?.number} / ${product?.Sizes[product?.Sizes.length - 1]?.number}` : "Sin definir"}
             imagen={product.Colors[0]?.color_shoe.image}
             precio={product.price}
             descuento={product.discount}

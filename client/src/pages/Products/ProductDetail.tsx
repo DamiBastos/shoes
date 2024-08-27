@@ -6,6 +6,8 @@ import { addItemToCart } from "../../api/cart";
 import "./ProductDetail.css";
 import { useUser } from "../../components/UserContext";
 import { formatNumber } from "../../utils/formateNumber";
+import Swal from 'sweetalert2'; // Importar SweetAlert2
+
 
 interface RouteParams {
   id: string;
@@ -15,40 +17,56 @@ interface RouteParams {
 const ProductDetail: React.FC = () => {
   const { id } = useParams<RouteParams>();
   const [product, setProduct] = useState<Product | null>(null);
-  const [clicked, setClicked] = useState(false);
-  const [selectedSize, setSelectedSize] = useState(35);
+  // const [clicked, setClicked] = useState(false);
+  // const [selectedSize, setSelectedSize] = useState(35);
+  const [selectedSize, setSelectedSize] = useState<number | null>(null); // Cambia el valor inicial a null
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-
-  const { user } = useUser(); // Obtener el usuario desde el contexto
+  const { user, openCart, fetchCart } = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
       const shoeData = await productDetail(id);
       setProduct(shoeData);
     };
-
     fetchData();
-
-    if (clicked) {
-      // Redirigir o actualizar la página después de 1 segundo
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
-    }
-  }, [id, clicked]);
-
+  }, [id]);
   if (!product) {
     return <div>Cargando...</div>;
   }
 
   const handleSizeSelect = (selectedSize: number) => {
     setSelectedSize(selectedSize);
+    setErrorMessage(null); // Limpiar mensaje de error al seleccionar talle
+
   };
 
   const handleAddToCart = async () => {
+    if (!user) {
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Atención!',
+        text: 'Debes iniciar sesión para agregar productos al carrito.',
+        showCancelButton: true,
+        confirmButtonText: 'Ir al login',
+        cancelButtonText: 'Seguir navegando',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/login'; // Redirigir al login
+        }
+      });
+      return;
+    }
+    if (!selectedSize) {
+      setErrorMessage("Por favor, selecciona un talle antes de agregar al carrito.");
+      return;
+    }
     try {
-      setClicked(true);
+      // setClicked(true);
       await addItemToCart(product.id, user?.id, selectedSize);
+      await fetchCart()
+      openCart(); // Abrir el carrito después de agregar el producto
+
     } catch (error) {
       console.error("Error al agregar el producto al carrito:", error);
     }
@@ -91,11 +109,13 @@ const ProductDetail: React.FC = () => {
           </p>
         <p>Género: {product.genre}</p>
         <p>Stock: {product.stock}</p>
-        <button className={`w-100 ${clicked ? "bg-secondary" : "bg-black"}`}
+        <button className={`w-100 `}
       onClick={handleAddToCart}
       style={{ color: "white" }}>
           Agregar al carrito
         </button>
+        {errorMessage && <p className="text-danger">{errorMessage}</p>}
+
         <p>Descripción: {product.description}</p>
       </section>
     </article>

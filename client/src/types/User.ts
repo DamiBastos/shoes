@@ -15,5 +15,9 @@ export interface UserContextType {
   shopList: any;
   fetchCart: () => void;
   fetchShopList: () => void;
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+
 }
 

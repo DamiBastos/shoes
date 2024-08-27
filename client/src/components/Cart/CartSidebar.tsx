@@ -30,7 +30,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
           <i className="bi bi-x-circle text-black"></i>
         </button>
       </div>
-      <div className="cart-sidebar-body d-flex flex-column justify-content-between border h-75">
+      <div className="cart-sidebar-body d-flex flex-column justify-content-between h-75">
         {products && products.items.length > 0 ? (
           <table className="">
             <thead>
@@ -61,7 +61,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
         ) : (
           <p>No hay productos en el carrito.</p>
         )}
-        <div className="d-flex flex-column gap-3 border rounded">
+        <div className="d-flex flex-column gap-3 rounded">
           <div className="bg-black text-light">
             TOTAL: ${products && products.total ? products.total : "0"}
           </div>
