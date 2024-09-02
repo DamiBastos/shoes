@@ -27,10 +27,12 @@ const Home: React.FC = () => {
     } else if (filter === "niño") {
       setFilteredProducts(
         products.filter((product) => {
-          const maxSize = product.Sizes?.[product.Sizes.length - 1]?.number;
-          return maxSize && parseInt(maxSize) < 35;
+          // Verificar si existe al menos una talla menor a 35
+          const hasSizeBelow35 = product.Sizes?.some((size: any) => parseInt(size.number) < 35);
+          // Comprobar si hay talla menor a 35 o si el género es "niño"
+          return hasSizeBelow35 || product.genre === "niño";
         })
-      );
+      );    
     } else {
       // Filter products based on the selected genre, including 'unisex' for both men and women
       setFilteredProducts(

@@ -7,18 +7,36 @@ import { formatNumber } from "../../../utils/formateNumber";
 
 const ProductList: React.FC = () => {
   const [shoes, setShoes] = useState<Product[] | null>(null);
+  const [filteredShoes, setFilteredShoes] = useState<Product[] | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false); // State for Create Modal
-
+  const [selectedProvider, setSelectedProvider] = useState(""); // State for provider filter
+  const [selectedBrand, setSelectedBrand] = useState(""); // State for brand filter
+ 
+ 
   const fetchShoes = async () => {
     const shopsData = await listShoes();
     setShoes(shopsData);
+    setFilteredShoes(shopsData); // Initially, no filter is applied
   };
 
   useEffect(() => {
     fetchShoes();
   }, []);
+
+   // Update filtered products when filters change
+   useEffect(() => {
+    if (shoes) {
+      const filtered = shoes.filter(shoe => {
+        return (
+          (selectedProvider ? shoe.provider === selectedProvider : true) &&
+          (selectedBrand ? shoe.brand === selectedBrand : true) // Assuming 'brand' field exists
+        );
+      });
+      setFilteredShoes(filtered);
+    }
+  }, [selectedProvider, selectedBrand, shoes]);
 
   const handleEdit = (product: Product) => {
     setSelectedProduct(product);
@@ -45,13 +63,47 @@ const ProductList: React.FC = () => {
     fetchShoes();
   };
 
+  // Handlers for filters
+  const handleProviderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedProvider(event.target.value);
+  };
+
+  const handleBrandChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedBrand(event.target.value);
+  };
+
   return (
     <>
       <div>
         Lista de productos
         <div className="cart-sidebar-body d-flex flex-column justify-content-between border h-75">
+          <div className="d-flex justify-content-between">
           <button onClick={handleCreate}>Crear nuevo</button> {/* Button to open Create Modal */}
-          {shoes && shoes.length > 0 ? (
+          <div className="d-flex gap-3 align-items-center">
+          <div className="d-flex gap-1">
+            <label htmlFor="">Proveedor:</label>
+            <select name="Proveedor" onChange={handleProviderChange} value={selectedProvider}>
+            <option value="">Todos</option>
+            <option value="Ariel">Ariel</option>
+            <option value="William">William</option>
+            <option value="Silvia">Silvia</option>
+
+          </select>
+          </div>
+          <div className="d-flex gap-1">
+          <label htmlFor="">Marca:</label>
+
+          <select name="Marca" onChange={handleBrandChange} value={selectedBrand}>
+          <option value="">Todos</option>
+            <option value="Nike">Nike</option>
+            <option value="Adidas">Adidas</option>
+            <option value="Vans">Vans</option>
+
+          </select>
+          </div>
+          </div>
+          </div>
+          {filteredShoes && filteredShoes.length > 0 ? (
             <table className="">
               <thead>
                 <tr className="">
@@ -64,26 +116,9 @@ const ProductList: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="">
-                {shoes?.map((shoe: any, index: number) => (
+                {filteredShoes?.map((shoe: any, index: number) => (
                   <tr className="" key={index}>
                     <td className="p-1">{shoe.model}</td>
-                    {/* <td className="p-1">{shoe.brand}</td> */}
-                    {/* <td className="d-flex justify-content-center align-items-center">
-                      {shoe.Colors
-                        ? shoe.Colors.map((color: Color, index: number) => (
-                            <div
-                              className="rounded-button p-1"
-                              style={{
-                                backgroundColor: color.name,
-                                color: color.name,
-                              }}
-                              key={index}
-                            >
-                              -
-                            </div>
-                          ))
-                        : null}
-                    </td> */}
                     <td className="p-1">
                       <div className=" h-25 border">
                       <img

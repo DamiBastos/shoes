@@ -106,6 +106,14 @@ const CreateProductForm: React.FC<CreateProductFormProps> = ({ onClose }) => {
     });
   };
 
+  const handleGenreChange= (event: React.ChangeEvent<HTMLSelectElement>) =>{
+    const selected = event.target.value
+    setFormData({
+      ...formData,
+      genre: selected,
+    });
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <InputField
@@ -149,7 +157,7 @@ const CreateProductForm: React.FC<CreateProductFormProps> = ({ onClose }) => {
         value={selectedOptions}
         onChange={handleCheckboxChange}
       />
-      <InputField
+      {/* <InputField
         label="Género"
         type="text"
         name="genre"
@@ -157,6 +165,22 @@ const CreateProductForm: React.FC<CreateProductFormProps> = ({ onClose }) => {
         placeholder="Unisex"
         value={formData.genre}
         onChange={handleChange}
+      /> */}
+
+      <SelectField
+        label="Género"
+        name="genre"
+        id="genre"
+        multiple={false}
+        onChange={handleGenreChange}
+        options={
+          [
+          {label:"Unisex",value:"unisex"},
+          {label:"Hombre",value:"hombre"},
+          {label:"Mujer",value:"mujer"},
+          {label:"Niño",value:"niño"}
+        ]
+        }
       />
       <InputField
         label="Stock"
