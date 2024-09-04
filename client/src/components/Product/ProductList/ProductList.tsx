@@ -87,6 +87,13 @@ const ProductList: React.FC = () => {
             <option value="Ariel">Ariel</option>
             <option value="William">William</option>
             <option value="Silvia">Silvia</option>
+            <option value="Giovani">Giovani</option>
+            <option value="Romina">Romina</option>
+
+            <option value="Claudia">Claudia</option>
+            <option value="Mono's">Mono's</option>
+
+
 
           </select>
           </div>
@@ -98,6 +105,10 @@ const ProductList: React.FC = () => {
             <option value="Nike">Nike</option>
             <option value="Adidas">Adidas</option>
             <option value="Vans">Vans</option>
+            <option value="Puma">Puma</option>
+            <option value="Converse">Converse</option>
+
+
 
           </select>
           </div>
