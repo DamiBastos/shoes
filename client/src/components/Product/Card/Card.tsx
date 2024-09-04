@@ -23,12 +23,12 @@ const Card: React.FC<CardProps> = ({
   }, []);
 
   return (
-    <div className="card">
+    <div className="card d-flex align-items-center justify-content-center">
       <a href={`/product/${id}`}>
       <h5 className="heading heading-5 strong-600 text-capitalize">
             {nombre}
           </h5>
-        <div className="container-img">
+        <div className="container-img ">
           <img
             src={`${imagen}`}
             alt={nombre}

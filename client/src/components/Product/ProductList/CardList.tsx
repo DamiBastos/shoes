@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Card from "../Card/Card";
 import { Product } from "../../../types";
 import EditProductModal from "../ProductForms/EditProductModal";
+import "./cardList.css"
 
 interface CardListProps {
   products: Product[];
@@ -23,9 +24,9 @@ const CardList: React.FC<CardListProps> = ({ products }) => {
   };
 
   return (
-    <section  className="w-100 d-flex flex-wrap align-items-center justify-content-center">
+    <section  className="cardlist__container w-100 d-flex flex-wrap justify-content-around gap-3">
       {products.map((product) => (
-        <ul className="d-flex align-items-center justify-content-center" key={product.id}>
+        <div className="cardlist__cards" key={product.id}>
           <Card
             id={product.id}
             nombre={product.model}
@@ -37,7 +38,7 @@ const CardList: React.FC<CardListProps> = ({ products }) => {
             cuotas={product.stock}
             openModal={() => handleEdit(product)} // Definir la función openModal aquí
           />
-        </ul>
+        </div>
       ))}
       {selectedProduct && (
         <EditProductModal
