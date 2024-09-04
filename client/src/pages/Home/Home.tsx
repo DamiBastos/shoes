@@ -5,6 +5,7 @@ import { Product } from "../../types";
 import { listShoes } from "../../api/shoes"; // Asegúrate de tener esta función
 import CardList from "../../components/Product/ProductList/CardList";
 import "./home.css";
+import FixedButtons from "../../components/FixedButtons/FixedButons";
 
 const Home: React.FC = () => {
   const { filter, setFilter } = useFilter();
@@ -142,6 +143,7 @@ const Home: React.FC = () => {
           {/* <a href="">VER TODOS LOS PRODUCTOS</a> */}
         </section>
       </article>
+      <FixedButtons/>
     </main>
   );
 };

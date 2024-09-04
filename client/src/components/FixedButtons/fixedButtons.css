@@ -1,0 +1,41 @@
+
+.arrowButton {
+  position: fixed; 
+  bottom: 20px;    
+  left: 20px;      
+  background-color: transparent; 
+  border: none;    
+  padding: 10px;   
+  border-radius: 50%; 
+  cursor: pointer;
+  font-size: 20px; 
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  outline: none;
+  z-index: 1000;
+  width: 4rem;
+}
+
+.whatsappButton {
+  position: fixed; 
+  bottom: 20px;    
+  right: 20px;     
+  background-color: transparent;
+  border: none;    
+  padding: 10px;   
+  border-radius: 50%; 
+  cursor: pointer;
+  font-size: 20px; 
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  outline: none;
+  z-index: 1000; 
+  width: 4rem;
+
+}
+
+.bi-arrow-bar-up {
+  color: gray;
+}
+
+.bi-whatsapp {
+  color: #25D366;
+}
