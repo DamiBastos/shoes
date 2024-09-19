@@ -9,7 +9,6 @@ import FixedButtons from "../../components/FixedButtons/FixedButons";
 
 const Home: React.FC = () => {
   const { filter, setFilter } = useFilter();
-  // const { cart, fetchCart } = useUser(); // Suponiendo que necesitas fetchCart para algo más
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 

@@ -47,7 +47,6 @@ export const productCreate = async (product: Product) => {
     }
 
     const data = await response.json();
-    console.log("data api: ", data);
 
     // Alerta de éxito
     Swal.fire({

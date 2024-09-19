@@ -64,7 +64,7 @@ const Header: React.FC = () => {
           {user ? (
             <div className="header__sesion d-flex align-items-center justify-content">
               <div className="d-flex align-items-center">
-                {!user.isAdmin ? <a href="/shops">Mis compras</a> : null}
+                {!user.isAdmin ? <a href="/compras">Mis compras</a> : null}
               </div>
               <div className="usuario-card">{user.username}</div>
               <button onClick={handleLogout} className="btn btn-link">
@@ -73,7 +73,7 @@ const Header: React.FC = () => {
             </div>
           ) : (
             <div className="d-flex gap-3">
-              <a href="/register">Crear cuenta</a>
+              <a href="/registro">Crear cuenta</a>
               <a href="/login">Iniciar sesión</a>
             </div>
           )}

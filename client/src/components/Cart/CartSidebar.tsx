@@ -66,7 +66,7 @@ const CartSidebar: React.FC<CartSidebarProps> = ({
             TOTAL: ${products && products.total ? products.total : "0"}
           </div>
           <a
-            href="/payment"
+            href="/pago"
             className={`border p-1 rounded text-light ${
               products?.items.length < 1
                 ? "disabled-link bg-secondary"

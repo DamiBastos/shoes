@@ -47,7 +47,6 @@ export const userListShop = async (id: string | undefined): Promise<Shop[]> => {
       }
   
       const data = await response.json();
-      console.log("Respuesta de la API de compras: ", data);
   
       // Mostrar alerta de éxito con opciones de redirección
       Swal.fire({
@@ -61,7 +60,7 @@ export const userListShop = async (id: string | undefined): Promise<Shop[]> => {
         if (result.isConfirmed) {
           window.location.href = '/';
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          window.location.href = '/shops';
+          window.location.href = '/compras';
         }
       });
   

@@ -25,14 +25,14 @@ function App() {
       {/* Rutas públicas */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/products" element={<Products />} />
-      <Route path="/product/:id" element={<ProductDetail />} />
-      <Route path="/payment" element={<Checkout />} />
+      <Route path="/registro" element={<Register />} />
+      <Route path="/zapatillas" element={<Products />} />
+      <Route path="/zapatilla/:id" element={<ProductDetail />} />
+      <Route path="/pago" element={<Checkout />} />
 
       {/* Rutas protegidas */}
       <Route
-        path="/shops"
+        path="/compras"
         element={<ProtectedRoute element={<MyShops />} userOnly={user?.id || null} />}
       />
       <Route
