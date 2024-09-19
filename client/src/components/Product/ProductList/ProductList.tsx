@@ -89,9 +89,10 @@ const ProductList: React.FC = () => {
             <option value="Silvia">Silvia</option>
             <option value="Giovani">Giovani</option>
             <option value="Romina">Romina</option>
-
             <option value="Claudia">Claudia</option>
             <option value="Mono's">Mono's</option>
+            <option value="Ojotas-pamela">Pamela</option>
+
 
 
 
