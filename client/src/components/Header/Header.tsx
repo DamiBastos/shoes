@@ -81,8 +81,8 @@ const Header: React.FC = () => {
       </article>
       <article className="w-100 px-3 d-flex justify-content-between align-items-center shadow-sm bg-body-tertiary">
         <section className="px-1">
-          <a className="logo p-1" href="/">
-            SHOESMARKET
+          <a className=" p-1" href="/">
+            <h1 className="logo">SHOESMARKET</h1>
           </a>
         </section>
         <nav className="header__nav d-flex gap-2">
